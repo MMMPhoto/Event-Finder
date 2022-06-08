@@ -1,13 +1,14 @@
+// Set global variables
 let userLat;
 let userLon;
 let map;
-let gotPosition = false;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
     userLat = position.coords.latitude;
     userLon = position.coords.longitude;
-    generateMap(userLat, userLon); 
+    generateMap(userLat, userLon);
+    addUserMarker(userLat, userLon);
     console.log(`User's position is: Lat: ${userLat}, Lon: ${userLon}`);
 };
 let positionError = (err) => {
@@ -15,7 +16,7 @@ let positionError = (err) => {
 };
 navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
-// Generate map function
+// Generate map
 let generateMap = (userLat, userLon) => {
     map = L.map('map').setView([userLat, userLon], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -23,3 +24,8 @@ let generateMap = (userLat, userLon) => {
         attribution: '© OpenStreetMap'
     }).addTo(map);
 };
+// Generate user location marker
+let addUserMarker = (userLat, userLon) => {
+    L.marker([userLat, userLon]).addTo(map);
+};
+
