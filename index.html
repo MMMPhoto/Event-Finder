@@ -4,13 +4,94 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
-    <title>Event Finder</title>
+    <title>Event Planner</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <h1>Event Finder! (deployment test)</h1>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <header>
+          <h2>Event Planner</h2>
+        </header>
+        
+        <section>
+          <nav>
+            
+            <div class="search">
+              <p id="searchHeader">Search for an Event</p>
+                <ul>
+               <ui><div id="searchCity">City:
+               <select name="cities" id="cityInput">
+                    <option value="Atlanta">Atlanta</option>
+                    <option value="Boston">Boston</option>
+                    <option value="New York">New York</option>
+                    <option value="Chicago">Chicago</option>
+                  </select>
+                  </div>
+                </ui> 
+                
+                <br>
+                <ui><div id="searchGenre">Genre:
+                    <select name="genre" id="genreInput">
+                        <option value="rock">Rock</option>
+                        <option value="pop">Pop</option>
+                        <option value="rap">Rap</option>
+                        <option value="metal">Metal</option>
+                      </select>
+                    
+                    </div>
+                    </ui>
+
+                    <br>
+                    
+                    <div id="searchFamily">Family Friendly:
+                        <select name="family" id="familyInput">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                        </ui>
+
+                        <br>
+
+                        <div id="searchRadius">Radius:
+                          <select name="radius" id="radiusInput">
+                              <option value="5">Within 5 miles</option>
+                              <option value="10">Within 10 miles</option>
+                              <option value="15">Within 15 miles</option>
+                              <option value="20">Within 20 miles</option>
+                            </select>
+                          </div>
+                          </ui>
+                </ul>
+
+            </div>
+            
+          </nav>
+          
+          <article><p id="eventHeader"><u>Events</u></p>
+              <div id="eventList">
+           <div class="event" id="eventOne">Event One</div>
+           <div class="event" id="eventTwo">Event Two</div>
+           <div class="event" id="eventThree">Event Three</div>
+           <div class="event" id="eventFour">Event Four</div>
+           <div class="event" id="eventFive">Event Five</div>
+           <div class="event" id="eventSix">Event Six</div>
+           <div class="event" id="eventSeven">Event Seven</div>
+           <div class="event" id="eventEight">Event Eight</div>
+           <div class="event" id="eventNine">Event Nine</div>
+        </div>
+          </article>
+          
+        </section>
+        
+        <footer>
+          <p></p>
+        </footer>
+        
+       
+
+
+
+
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
