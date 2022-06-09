@@ -24,6 +24,7 @@ html {
     background-color: #12232E;
     padding: 20px;
     margin-right: 5px;
+    
   }
   
   /* Style the list inside the menu */
@@ -75,7 +76,7 @@ html {
      background-color: #007CC7;
      justify-content: space-around;
      min-width: 200px;
-     width: 28%;
+     width: 20%;
      border-radius: 5px;
      box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
      height:auto;
@@ -86,7 +87,7 @@ html {
      font-size: 24px;
      text-align: center;
      color:white;
-     padding:10px;
+     padding:5px;
  }
 
  #eventList{
@@ -96,10 +97,21 @@ html {
      
  }
 
+ #submit{
+   font-size: 20pt;
+   margin: 10px;
+   color:white;
+   border-radius: 5px;
+  background-color: #12232E;
+  
+   
+ }
+
  #eventHeader{
      color:white;
      text-align: center;
      font-size: 36pt;
+     
  }
 
  #searchHeader{
@@ -186,5 +198,15 @@ html {
  .eventDisplay{
    font-size: 14pt;
    text-align: center;
+  
+ }
+
+ #rightside{
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+  background-color: #12232E;
+  width:20%;
+  color:white;
+  border-radius: 5px;
+  margin-left: 5px;
  }
   

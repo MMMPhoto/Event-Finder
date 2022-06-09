@@ -24,7 +24,7 @@ function displayEvents(jsonData) {
         
         var eventDisplay = document.querySelector(`#event${x+1}`);
         eventDisplay.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`
-        eventDisplay.innerHTML += `<p class="eventDisplay"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
+        eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
 
     }
 
