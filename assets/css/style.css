@@ -159,7 +159,7 @@ html {
 }
 #yearInput{
   border-radius: 5px;
-  width: 45px;  
+  width: 50px;  
   font-size: 16pt;
 }
  
@@ -210,7 +210,15 @@ html {
  .eventDisplay{
    font-size: 14pt;
    text-align: center;
-  
+ }
+
+ .eventTickets a{
+   font-size:12pt;
+   color:white;
+   text-decoration: none;
+ }
+ .eventTickets a:hover{
+  color:#12232E;
  }
 
  #rightside{
