@@ -56,22 +56,25 @@
 
                         <ui><div id="searchRadius">Radius:
                           <select name="radius" id="radiusInput">
-                              <option value="5">Within 5 miles</option>
+                              
                               <option value="10">Within 10 miles</option>
-                              <option value="15">Within 15 miles</option>
                               <option value="20">Within 20 miles</option>
+                              <option value="30">Within 30 miles</option>
+                              <option value="50">Within 50 miles</option>
                             </select>
                           </div></ui>
 
                           <br>
 
-                          <ui><div id="searchDate">Enter Date (yyyy-mm-dd):
-                            <input id="dateInput" type="text">
+                          <ui><div id="searchDate">Select Date:
+                            <input type="text" id="monthInput" minlength="2" maxlength="2" placeholder="mm">
+                            <input type="text" id="dayInput" minlength="2" maxlength="2" placeholder="dd">
+                            <input type="text" id="yearInput" minlength="4" maxlength="4" placeholder="yyyy">
                             </div></ui>
 
-                          <ui><button id="submit" onclick="handleSearch()">Submit</button></ui>
+                          <!-- <button id="submit" onclick="handleSearch()">Submit</button> -->
                 </ul>
-
+                <button id="submit" onclick="handleSearch()">Submit</button>
             </div>
             
           </nav>
@@ -107,3 +110,7 @@
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
+
+<!-- <option value="01">January</option><option value="02">February</option><option value="03">March</option><option value="04">April</option>
+                             <option value="05">May</option><option value="06">June</option><option value="07">July</option><option value="08">August</option>
+                             <option value="09">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option> -->

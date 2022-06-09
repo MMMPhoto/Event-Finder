@@ -24,10 +24,10 @@ html {
     background-color: #12232E;
     padding: 20px;
     margin-right: 5px;
+    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
     
   }
   
-  /* Style the list inside the menu */
   nav ul {
     list-style-type: none;
     padding: 0;
@@ -38,8 +38,7 @@ html {
     padding: 20px;
     width: 70%;
     background-color: #12232E;
-    /* height: fit-content; */
-    /* display: flex; */
+    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
   }
   section{
       margin-top:5px;
@@ -63,9 +62,7 @@ html {
     font-size: 30px;
     border-radius:5px;
     padding:10px;
-    
-    /*  */
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);  
+    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
 
   }
  
@@ -91,7 +88,8 @@ html {
  }
 
  #eventList{
-     display:flex;
+     /* display:flex; */
+     display:none;
      flex-wrap: wrap;
      justify-content: center;
      
@@ -148,8 +146,22 @@ html {
   /* width: 218px; */
   font-size: 16pt;
   border-radius: 5px;
-  
  }
+ #monthInput{
+   border-radius: 5px;
+   width: 38px;  
+   font-size: 16pt;
+ }
+ #dayInput{
+  border-radius: 5px;
+  width: 38px;  
+  font-size: 16pt;
+}
+#yearInput{
+  border-radius: 5px;
+  width: 45px;  
+  font-size: 16pt;
+}
  
  #searchCity{
   border-radius: 5px;
