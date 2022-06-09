@@ -16,6 +16,7 @@ fetch(url).then (data=>data.json()).then (data =>{
 
     jsonData = data;
     displayEvents(jsonData);
+    console.log()
 })
 
 }
@@ -90,7 +91,6 @@ function displayEventNine(jsonData){
 // Set global variables
 let userLat;
 let userLon;
-let map;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
