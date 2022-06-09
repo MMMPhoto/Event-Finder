@@ -29,12 +29,16 @@
                 </ui> 
                 
                 <br>
-                <ui><div id="searchGenre">Genre:
+                <ui><div id="searchGenre">Event Type:
                     <select name="genre" id="genreInput">
-                        <option value="rock">Rock</option>
-                        <option value="pop">Pop</option>
-                        <option value="rap">Rap</option>
-                        <option value="metal">Metal</option>
+                        <option value="rock">Music: Rock</option>
+                        <option value="pop">Music: Pop</option>
+                        <option value="rap">Music: Rap</option>
+                        <option value="metal">Music: Metal</option>
+                        <option value="baseball">Sports: Baseball</option>
+                        <option value="soccer">Sports: Soccer</option>
+                        <option value="football">Sports: Football</option>
+                        <option value="basketball">Sports: Basketball</option>
                     </select>
                     
                     </div></ui>
@@ -62,7 +66,7 @@
                           <br>
 
                           <ui><div id="searchDate">Enter Date (yyyy-mm-dd):
-                            <input type="text">
+                            <input id="dateInput" type="text">
                             </div></ui>
 
                           <ui><button id="submit" onclick="handleSearch()">Submit</button></ui>
@@ -74,15 +78,15 @@
           
           <article><p id="eventHeader"><u>Events</u></p>
               <div id="eventList">
-           <div class="event" id="eventOne">Event One</div>
-           <div class="event" id="eventTwo">Event Two</div>
-           <div class="event" id="eventThree">Event Three</div>
-           <div class="event" id="eventFour">Event Four</div>
-           <div class="event" id="eventFive">Event Five</div>
-           <div class="event" id="eventSix">Event Six</div>
-           <div class="event" id="eventSeven">Event Seven</div>
-           <div class="event" id="eventEight">Event Eight</div>
-           <div class="event" id="eventNine">Event Nine</div>
+           <div class="event" id="event1">Event One</div>
+           <div class="event" id="event2">Event Two</div>
+           <div class="event" id="event3">Event Three</div>
+           <div class="event" id="event4">Event Four</div>
+           <div class="event" id="event5">Event Five</div>
+           <div class="event" id="event6">Event Six</div>
+           <div class="event" id="event7">Event Seven</div>
+           <div class="event" id="event8">Event Eight</div>
+           <div class="event" id="event9">Event Nine</div>
         </div>
           </article>
           

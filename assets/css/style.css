@@ -74,7 +74,8 @@ html {
      flex-wrap:wrap;
      background-color: #007CC7;
      justify-content: space-around;
-     width:28%;
+     min-width: 200px;
+     width: 28%;
      border-radius: 5px;
      box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
      height:auto;
@@ -86,8 +87,6 @@ html {
      text-align: center;
      color:white;
      padding:10px;
-     
-     
  }
 
  #eventList{
@@ -115,13 +114,13 @@ html {
  }
 
  #cityInput{
-  /* width: 150px; */
+  /* width:auto; */
   font-size: 16pt;
   border-radius: 5px;
 
 }
 #genreInput{
-  /* width: 223px; */
+  /* width:auto; */
   font-size: 16pt;
   border-radius: 5px;
 
