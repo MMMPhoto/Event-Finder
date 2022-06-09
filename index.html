@@ -27,6 +27,7 @@
                     <option value="Los Angeles">Los Angeles</option>
                     <option value="Miami">Miami</option>
                     <option value="New York">New York</option>
+                    <option value="Philadelphia">Philadelphia</option>
                     <option value="Phoenix">Phoenix</option>
                     <option value="San Diego">San Diego</option>
                     <option value="San Francisco">San Francisco</option>
@@ -38,14 +39,15 @@
                 <br>
                 <ui><div id="searchGenre">Event Type:
                     <select name="genre" id="genreInput">
-                        <option value="Rock">Music: Rock</option>
-                        <option value="Pop">Music: Pop</option>
-                        <option value="Rap">Music: Rap</option>
-                        <option value="Metal">Music: Metal</option>
+                        <option value="Rock">Concerts: Rock</option>
+                        <option value="Pop">Concerts: Pop</option>
+                        <option value="Rap">Concerts: Rap</option>
+                        <option value="Metal">Concerts: Metal</option>
+                        <option value="Musicals">Musicals</option>
                         <option value="Baseball">Sports: Baseball</option>
                         <option value="Soccer">Sports: Soccer</option>
                         <option value="Football">Sports: Football</option>
-                        <option value="Basketball">Sports: Basketball</option>
+                        <!-- <option value="Basketball">Sports: Basketball</option> -->
                     </select>
                     
                     </div></ui>
@@ -63,7 +65,6 @@
 
                         <ui><div id="searchRadius">Radius:
                           <select name="radius" id="radiusInput">
-                              
                               <option value="10">Within 10 miles</option>
                               <option value="20">Within 20 miles</option>
                               <option value="30">Within 30 miles</option>
@@ -86,7 +87,8 @@
             
           </nav>
           
-          <article><p id="eventHeader"><u>Events</u></p>
+          <article>
+            <p id="eventHeader"><u>Events</u></p>
               <div id="eventList">
            <div class="event" id="event1">Event One</div>
            <div class="event" id="event2">Event Two</div>

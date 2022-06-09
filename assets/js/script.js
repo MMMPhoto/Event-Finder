@@ -23,16 +23,30 @@ function handleSearch() {
 }
 
 function displayEvents(jsonData) {
+    //This element begins as display: none. Changes it to flex when submit button is pressed
     document.getElementById("eventList").style.display = "flex";
+
     var eventHeader = document.querySelector('#eventHeader')
     var city = document.querySelector('#cityInput').value;
     var genre = document.querySelector('#genreInput').value;
-    eventHeader.innerHTML = `${city} ${genre} Events`;
+
+    //Changes the event header to the user's city and genre selection
+    if(genre == "Musicals"){
+        eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
+    }else{
+    eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
+    }
     for (var x = 0; x < 9; x++) {
         
+        //Sets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x+1}`);
+
+        //Sets array for the date to rearrange it to be in mm/dd/yyyy format
+        var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
+        var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
+
         eventDisplay.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`
-        eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].dates.start.localDate}</p>`
+        eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`
         eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
         eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p>`;
 
