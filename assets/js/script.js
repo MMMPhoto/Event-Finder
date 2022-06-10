@@ -15,8 +15,9 @@ console.log(city);
 fetch(url).then (data=>data.json()).then (data =>{
 
     jsonData = data;
+    console.log(jsonData);
     displayEvents(jsonData);
-    console.log()
+    addEventMarker(jsonData);
 })
 
 }
@@ -91,6 +92,7 @@ function displayEventNine(jsonData){
 // Set global variables
 let userLat;
 let userLon;
+let map;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
@@ -117,4 +119,13 @@ let generateMap = (userLat, userLon) => {
 let addUserMarker = (userLat, userLon) => {
     L.marker([userLat, userLon]).addTo(map);
 };
+// Generate event location marker
+let addEventMarker = (jsonData) => {
+    for (i = 0; i < jsonData._embedded.events.length; i++) {
+        let venueLat = jsonData._embedded.events[i]._embedded.venues[0].location.latitude;
+        let venueLon = jsonData._embedded.events[i]._embedded.venues[0].location.longitude;
+        L.marker([venueLat, venueLon]).addTo(map);
+    };  
+};
+
 

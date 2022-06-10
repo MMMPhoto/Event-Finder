@@ -1,6 +1,3 @@
-#map {
-    height: 500px;
-}
 html {
    background-color: lightgray;
   }
@@ -191,4 +188,7 @@ html {
    font-size: 14pt;
    text-align: center;
  }
-  
+ 
+ #map {
+     height: 500px;
+ }
