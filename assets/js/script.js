@@ -125,11 +125,12 @@ let addEventMarkers = (jsonData) => {
     if (typeof eventLayerGroup !== 'undefined') {
         eventLayerGroup.clearLayers();
     };
-    eventLayerGroup = L.layerGroup().addTo(map);
+    eventLayerGroup = L.featureGroup().addTo(map);
     for (i = 0; i < jsonData._embedded.events.length; i++) {
         let venueLat = jsonData._embedded.events[i]._embedded.venues[0].location.latitude;
         let venueLon = jsonData._embedded.events[i]._embedded.venues[0].location.longitude;
         marker = L.marker([venueLat, venueLon]).bindTooltip(`${jsonData._embedded.events[i].name}<br>${jsonData._embedded.events[i]._embedded.venues[0].name}`);
         eventLayerGroup.addLayer(marker);
     };
+    map.fitBounds(eventLayerGroup.getBounds());
 };
