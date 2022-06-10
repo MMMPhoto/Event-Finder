@@ -17,7 +17,7 @@ fetch(url).then (data=>data.json()).then (data =>{
     jsonData = data;
     console.log(jsonData);
     displayEvents(jsonData);
-    addEventMarker(jsonData);
+    addEventMarkers(jsonData);
 })
 
 }
@@ -93,6 +93,7 @@ function displayEventNine(jsonData){
 let userLat;
 let userLon;
 let map;
+let eventLayerGroup;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
@@ -109,7 +110,7 @@ navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
 // Generate map
 let generateMap = (userLat, userLon) => {
-    map = L.map('map').setView([userLat, userLon], 13);
+    map = L.map('map').setView([userLat, userLon], 11);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
@@ -120,12 +121,15 @@ let addUserMarker = (userLat, userLon) => {
     L.marker([userLat, userLon]).addTo(map).bindTooltip('You are here');      
 };
 // Generate event location marker
-let addEventMarker = (jsonData) => {
+let addEventMarkers = (jsonData) => {
+    if (typeof eventLayerGroup !== 'undefined') {
+        eventLayerGroup.clearLayers();
+    };
+    eventLayerGroup = L.layerGroup().addTo(map);
     for (i = 0; i < jsonData._embedded.events.length; i++) {
         let venueLat = jsonData._embedded.events[i]._embedded.venues[0].location.latitude;
         let venueLon = jsonData._embedded.events[i]._embedded.venues[0].location.longitude;
-        L.marker([venueLat, venueLon]).addTo(map).bindTooltip(`${jsonData._embedded.events[i].name}<br>${jsonData._embedded.events[i]._embedded.venues[0].name}`);
-    };  
+        marker = L.marker([venueLat, venueLon]).bindTooltip(`${jsonData._embedded.events[i].name}<br>${jsonData._embedded.events[i]._embedded.venues[0].name}`);
+        eventLayerGroup.addLayer(marker);
+    };
 };
-
-
