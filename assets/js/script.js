@@ -40,19 +40,28 @@ function displayEvents(jsonData) {
         
         //Sets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x+1}`);
-
+        
         //Sets array for the date to rearrange it to be in mm/dd/yyyy format
         var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
+       
         var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
-
+        eventDisplay.setAttribute("name", x);
+        
+        
         eventDisplay.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`
         eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`
         eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
         eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p>`;
-
+       
     }
+    
+}
+eventDisplay.addEventListener("click", displayData)
 
-
-
-
+function displayData(){
+    let displayClick = eventDisplay.target.name;
+    var info = document.getElementById('info');
+    
+    
+    info.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[displayClick].name}</p>`
 }
