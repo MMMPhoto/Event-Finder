@@ -89,7 +89,7 @@ function displayEventNine(jsonData){
 
 }
 
-// Set global variables
+// Set global map variables
 let userLat;
 let userLon;
 let map;
@@ -117,14 +117,14 @@ let generateMap = (userLat, userLon) => {
 };
 // Generate user location marker
 let addUserMarker = (userLat, userLon) => {
-    L.marker([userLat, userLon]).addTo(map);
+    L.marker([userLat, userLon]).addTo(map).bindTooltip('You are here');      
 };
 // Generate event location marker
 let addEventMarker = (jsonData) => {
     for (i = 0; i < jsonData._embedded.events.length; i++) {
         let venueLat = jsonData._embedded.events[i]._embedded.venues[0].location.latitude;
         let venueLon = jsonData._embedded.events[i]._embedded.venues[0].location.longitude;
-        L.marker([venueLat, venueLon]).addTo(map);
+        L.marker([venueLat, venueLon]).addTo(map).bindTooltip(`${jsonData._embedded.events[i].name}<br>${jsonData._embedded.events[i]._embedded.venues[0].name}`);
     };  
 };
 
