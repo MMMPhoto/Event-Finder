@@ -2,7 +2,7 @@ var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ"
 var eventSubmit = document.querySelector(".event");
 
 function handleSearch() {
-    var info = document.getElementById('info');
+    var info = document.getElementById('infoDisplay');
     var city = document.querySelector('#cityInput').value;
     var genre = document.querySelector('#genreInput').value;
     // var family = document.querySelector('#familyInput').value;
@@ -62,10 +62,10 @@ function displayEvents(jsonData) {
 function displayData(value){
    
     var x = value
-    var info = document.getElementById('info');
+    var info = document.getElementById('infoDisplay');
     
     
-    info.innerHTML = `<p>${jsonData._embedded.events[x].name}</p>`
+    info.innerHTML = `<p><b>${jsonData._embedded.events[x].name}</b></p>`
     info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`
     info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`
 

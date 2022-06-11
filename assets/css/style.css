@@ -15,6 +15,11 @@ html {
     color: white;
     border-radius: 5px;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);  
+    background-repeat: no-repeat ;
+    background-position-x:bottom;
+    background-position-y: center;
+    background-size:cover;
+    /* height:300px; */
   }
   
   
@@ -26,7 +31,6 @@ html {
     margin-right: 5px;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
     display: flex;
-    
   }
   
   nav ul {
@@ -107,7 +111,7 @@ html {
   background-color: #12232E;
   border-color:white;
   border-style:solid;
-  justify-content: center;
+  
   
  }
  #submit:hover{
@@ -287,6 +291,17 @@ html {
   margin-left: 5px;
   font-size: 36pt;
   text-align: center;
+  display: flex;
+  
+ }
+
+ #infoDisplay{
+  background-color: #007CC7;
+  margin:15px;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+  border-radius: 5px;
+  align-items: center;
+  width:100%;
  }
 
  .setBottom{
