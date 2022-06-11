@@ -1,5 +1,5 @@
 var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ"
-
+var eventSubmit = document.querySelector(".event");
 
 function handleSearch() {
 
@@ -45,23 +45,28 @@ function displayEvents(jsonData) {
         var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
        
         var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
-        eventDisplay.setAttribute("name", x);
+        
         
         
         eventDisplay.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`
         eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`
-        eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
-        eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p>`;
-       
+        eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
+        // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
+        eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`
+
     }
     
 }
-eventDisplay.addEventListener("click", displayData)
 
-function displayData(){
-    let displayClick = eventDisplay.target.name;
+
+function displayData(value){
+   
+    var x = value
     var info = document.getElementById('info');
     
     
-    info.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[displayClick].name}</p>`
+    info.innerHTML = `<p>${jsonData._embedded.events[x].name}</p>`
+    info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`
+    info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`
+
 }

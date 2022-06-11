@@ -71,7 +71,7 @@ html {
  .event{
      flex-wrap:wrap;
      background-color: #007CC7;
-     justify-content: space-around;
+     justify-content: space-between;
      min-width: 200px;
      width: 25%;
      border-radius: 5px;
@@ -85,10 +85,7 @@ html {
      text-align: center;
      color:white;
      padding:5px;
- }
-
- .event:hover{
-   background-color: #4DA8DA;;
+     position: relative;
  }
 
  #eventList{
@@ -105,6 +102,24 @@ html {
    color:white;
    border-radius: 5px;
   background-color: #12232E;
+ }
+
+ .infoButton{
+   font-size: 16pt;
+   border-bottom-left-radius: 5px;
+   border-bottom-right-radius: 5px;
+   background-color: #12232E;
+   color:white;
+
+   border:white;
+   border-style: solid;
+   border-width:1px;
+   width: 100%;
+   border-right: none;;
+   border-left:none;
+ }
+ .infoButton:hover{
+   background-color: #4DA8DA;
  }
 
  #eventHeader{
@@ -223,11 +238,14 @@ html {
    font-size:12pt;
    color:white;
    text-decoration: none;
+   
+   
  }
  .eventTickets a:hover{
   color:#12232E;
   text-decoration: underline;
  }
+
 
  #info{
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
@@ -236,5 +254,14 @@ html {
   color:white;
   border-radius: 5px;
   margin-left: 5px;
+  font-size: 36pt;
+  text-align: center;
+ }
+
+ .setBottom{
+   position:absolute;
+   bottom:0;
+   left:0;
+   right:0;
  }
   
