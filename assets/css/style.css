@@ -15,6 +15,12 @@ html {
     color: white;
     border-radius: 5px;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);  
+    background-repeat: no-repeat ;
+    background-position-x:bottom;
+    background-position-y: center;
+    background-size:cover;
+    /* height:300px; */
+
   }
   
   
@@ -24,9 +30,9 @@ html {
     background-color: #12232E;
     padding: 20px;
     margin-right: 5px;
+    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+    display: flex;
   }
-  
-  /* Style the list inside the menu */
   nav ul {
     list-style-type: none;
     padding: 0;
@@ -37,8 +43,7 @@ html {
     padding: 20px;
     width: 70%;
     background-color: #12232E;
-    /* height: fit-content; */
-    /* display: flex; */
+    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
   }
   section{
       margin-top:5px;
@@ -56,25 +61,25 @@ html {
     color: white;
   }
  
+  /* Styling for left side search area */
   .search{
     background-color: #007CC7 ;
     color:white;
     font-size: 30px;
     border-radius:5px;
     padding:10px;
-    
-    /*  */
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);  
-
+    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+    width: 100%;
   }
  
 
- 
+ /* Styling for each individual event generate*/
  .event{
      flex-wrap:wrap;
      background-color: #007CC7;
-     justify-content: space-around;
-     width:28%;
+     justify-content: space-between;
+     min-width: 200px;
+     width: 25%;
      border-radius: 5px;
      box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
      height:auto;
@@ -85,17 +90,72 @@ html {
      font-size: 24px;
      text-align: center;
      color:white;
-     padding:10px;
-     
-     
+     /* padding:5px; */
+     position: relative;
  }
 
+ /* Styling for the middle area where events are listed */
  #eventList{
-     display:flex;
+     /* display:flex; */
+     display:none;
      flex-wrap: wrap;
-     justify-content: center;
-     
+     justify-content: center;  
  }
+
+ /* Search submit button */
+ #submit{
+   font-size: 20pt;
+   margin: 10px;
+   color:white;
+   border-radius: 5px;
+  background-color: #12232E;
+  border-color:white;
+  border-style:solid;
+ }
+ #submit:hover{
+  background-color: #4DA8DA;
+}
+
+/* Event info button styling */
+ .infoButton{
+   font-size: 16pt;
+   border-bottom-left-radius: 5px;
+   border-bottom-right-radius: 5px;
+   background-color: #12232E;
+   color:white;
+   border:white;
+   border-style: solid;
+   border-width:1px;
+   width: 100%;
+   border-right: none;;
+   border-left:none;
+ }
+ .infoButton:hover{
+   background-color: #4DA8DA;
+ }
+
+ /* Save button on each individual event */
+ .saveButton{
+  font-size: 16pt;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #12232E;
+  color:white;
+  border:white;
+  border-style: solid;
+  border-width:1px;
+  width: 100%;
+  border-top:none;
+  border-right: none;;
+  border-left:none;
+  top:0;
+}
+.saveButton:hover{
+  background-color: #4DA8DA;
+}
+
+ 
+/* Header for middle area of page where events are shown */
 
  #eventHeader{
      color:white;
@@ -114,17 +174,16 @@ html {
    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
  }
 
+ /* List of all input styles */
  #cityInput{
-  /* width: 150px; */
+  /* width:auto; */
   font-size: 16pt;
   border-radius: 5px;
-
 }
 #genreInput{
-  /* width: 223px; */
+  /* width:auto; */
   font-size: 16pt;
   border-radius: 5px;
-
 }
 
  #familyInput{
@@ -132,14 +191,28 @@ html {
     font-size: 16pt;
     border-radius: 5px;
  }
-
  #radiusInput{
   /* width: 218px; */
   font-size: 16pt;
   border-radius: 5px;
-  
  }
+ #monthInput{
+   border-radius: 5px;
+   width: 38px;  
+   font-size: 16pt;
+ }
+ #dayInput{
+  border-radius: 5px;
+  width: 38px;  
+  font-size: 16pt;
+}
+#yearInput{
+  border-radius: 5px;
+  width: 50px;  
+  font-size: 16pt;
+}
  
+/* List of all search button styles */
  #searchCity{
   border-radius: 5px;
   background-color: #4DA8DA;
@@ -156,7 +229,6 @@ html {
    border-style: solid;
    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
  }
-
  #searchFamily{
   border-radius: 5px;
   background-color: #4DA8DA;
@@ -165,7 +237,6 @@ html {
    border-style: solid;
    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
  }
-
  #searchRadius{
   border-radius: 5px;
   background-color: #4DA8DA;
@@ -174,7 +245,6 @@ html {
    border-style: solid;
    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
  }
-
  #searchDate{
   border-radius: 5px;
   background-color: #4DA8DA;
@@ -184,11 +254,50 @@ html {
    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
  }
 
+ /* Event styles */
  .eventDisplay{
    font-size: 14pt;
    text-align: center;
  }
+ .eventTickets a{
+   font-size:12pt;
+   color:white;
+   text-decoration: none;
+ }
+ .eventTickets a:hover{
+  color:#12232E;
+  text-decoration: underline;
+ }
 
+/* Right side info styling */
+ #info{
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+  background-color: #12232E;
+  width:20%;
+  color:white;
+  border-radius: 5px;
+  margin-left: 5px;
+  font-size: 36pt;
+  text-align: center;
+  display: flex;
+ }
+ #infoDisplay{
+  background-color: #007CC7;
+  margin:15px;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+  border-radius: 5px;
+  align-items: center;
+  width:100%;
+ }
+
+ /* Styling for setting the Buy Tickets and Info button to bottom of the div */
+ .setBottom{
+   position:absolute;
+   bottom:0;
+   left:0;
+   right:0;
+ }
+ /* Map div styling */
  #map {
     height: 500px;
     border-radius: 5px;

@@ -1,97 +1,84 @@
-var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ"
-// var city = document.querySelector('#cityInput').value
-// let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${apiKey}`
+var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ";
+var eventSubmit = document.querySelector(".event");
 
-function handleSearch(){
-
+function handleSearch() {
+    var info = document.getElementById('infoDisplay');
     var city = document.querySelector('#cityInput').value;
     var genre = document.querySelector('#genreInput').value;
-    var family = document.querySelector('#familyInput').value;
-    
+    // var family = document.querySelector('#familyInput').value;
+    var day = document.querySelector('#dayInput').value;
+    var year = document.querySelector('#yearInput').value;
+    var month = document.querySelector('#monthInput').value;
+    var radius = document.querySelector('#radiusInput').value;
+
+    // Resets the right side info text area when another event is searched
+    info.innerHTML = `<br><u>Event Info</u>`
+
+    // API fetch
     console.log(city);
     let url;
-
+    // Checks if User location is being used instead of city
     if (city == 'User Location') {
         let userLatLon = `${userLat},${userLon}`;  
-        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&latlong=${userLatLon}&radius=5&unit=miles&startDateTime=2022-06-25T14:00:00Z&classificationName=${genre}&includeFamily=${family}&apikey=${apiKey}&sort=date,asc`;
+        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
-        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&city=${city}&classificationName=${genre}&includeFamily=${family}&apikey=${apiKey}`;
+        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
     };
 
-fetch(url).then (data=>data.json()).then (data =>{
+    fetch(url).then(data => data.json()).then(data => {
 
-    jsonData = data;
-    console.log(jsonData);
-    displayEvents(jsonData);
-    addEventMarkers(jsonData);
-})
+        jsonData = data;
+        console.log(jsonData);
+        displayEvents(jsonData);
+        addEventMarkers(jsonData);
+    });
+};
+
+function displayEvents(jsonData) {
+    //This element begins as display: none. Changes it to flex when submit button is pressed
+    document.getElementById("eventList").style.display = "flex";
+
+    var eventHeader = document.querySelector('#eventHeader')
+    var city = document.querySelector('#cityInput').value;
+    var genre = document.querySelector('#genreInput').value;
+
+    //Changes the event header to the user's city and genre selection
+    if (genre == "Musicals") {
+        eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
+    } else {
+        eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
+    };
+
+    for (var x = 0; x < 9; x++) {
+
+        //Targets the text area for the corresponding event 
+        var eventDisplay = document.querySelector(`#event${x + 1}`);
+
+        //Sets array for the date to rearrange it to be in mm/dd/yyyy format
+        var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
+        var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
+
+        // Generates each listed event
+        eventDisplay.innerHTML = `<button class="saveButton">Save</button>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
+        eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
+        // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
+        eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
+
+    };
 
 }
 
-function displayEvents(jsonData){
-    displayEventOne(jsonData);
-    displayEventTwo(jsonData);
-    displayEventThree(jsonData);
-    displayEventFour(jsonData);
-    displayEventFive(jsonData);
-    displayEventSix(jsonData);
-    displayEventSeven(jsonData);
-    displayEventEight(jsonData);
-    displayEventNine(jsonData);
-}
+// Function for display info on the right side of screen
+function displayData(value) {
 
-function displayEventOne(jsonData){
-    var eventOne = document.querySelector('#eventOne');
-    eventOne.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[0].name}</p>`;
-    eventOne.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[0].images[0].url}"></p>`;
-}
+    var x = value;
+    var info = document.getElementById('infoDisplay');
 
-function displayEventTwo(jsonData){
-    var eventTwo = document.querySelector('#eventTwo');
-    eventTwo.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[1].name}</p>`;
-    eventTwo.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[1].images[0].url}"></p>`;
-}
-
-function displayEventThree(jsonData){
-    var eventThree = document.querySelector('#eventThree');
-    eventThree.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[2].name}</p>`;
-    eventThree.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[2].images[0].url}"></p>`;
-}
-
-function displayEventFour(jsonData){
-    var eventFour = document.querySelector('#eventFour');
-    eventFour.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[3].name}</p>`;
-    eventFour.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[3].images[0].url}"></p>`;
-}
-
-function displayEventFive(jsonData){
-    var eventFive = document.querySelector('#eventFive');
-    eventFive.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[4].name}</p>`;
-    eventFive.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[4].images[0].url}"></p>`;
-}
-
-function displayEventSix(jsonData){
-    var eventSix = document.querySelector('#eventSix');
-    eventSix.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[5].name}</p>`;
-    eventSix.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[5].images[0].url}"></p>`;
-}
-
-function displayEventSeven(jsonData){
-    var eventSeven = document.querySelector('#eventSeven');
-    eventSeven.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[6].name}</p>`;
-    eventSeven.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[6].images[0].url}"></p>`;
-}
-
-function displayEventEight(jsonData){
-    var eventEight = document.querySelector('#eventEight');
-    eventEight.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[7].name}</p>`;
-    eventEight.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[7].images[0].url}"></p>`;  
-}
-
-function displayEventNine(jsonData){
-    var eventNine = document.querySelector('#eventNine');
-    eventNine.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[8].name}</p>`;
-    eventNine.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[8].images[0].url}"></p>`;
+    info.innerHTML = `<p><b>${jsonData._embedded.events[x].name}</b></p>`;
+    info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`;
+    info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`;
 
 }
 
