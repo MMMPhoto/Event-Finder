@@ -36,56 +36,65 @@ function displayEvents(jsonData){
 function displayEventOne(jsonData){
     var eventOne = document.querySelector('#eventOne');
     eventOne.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[0].name}</p>`;
-    eventOne.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[0].images[0].url}"></p>`;
+    // $("#eventOne").html(`<div class = "event" style = "background-image: url('${jsonData._embedded.events[0].images[0].url}'); background-size: 100% 100%">`);
+    $("#eventOne").attr("style", `background-image: url('${jsonData._embedded.events[0].images[1].url}') ` )
+    // $("#eventOne").attr("style",  "background-size: 100% 100%" )
 }
 
 function displayEventTwo(jsonData){
     var eventTwo = document.querySelector('#eventTwo');
     eventTwo.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[1].name}</p>`;
-    eventTwo.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[1].images[0].url}"></p>`;
+    // eventTwo.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[1].images[0].url}"></p>`;
+    $("#eventTwo").attr("style", `background-image: url('${jsonData._embedded.events[1].images[1].url}') ` )
 }
 
 function displayEventThree(jsonData){
     var eventThree = document.querySelector('#eventThree');
     eventThree.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[2].name}</p>`;
-    eventThree.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[2].images[0].url}"></p>`;
+    // eventThree.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[2].images[0].url}"></p>`;
+    $("#eventThree").attr("style", `background-image: url('${jsonData._embedded.events[2].images[1].url}') ` )
 }
 
 function displayEventFour(jsonData){
     var eventFour = document.querySelector('#eventFour');
     eventFour.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[3].name}</p>`;
-    eventFour.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[3].images[0].url}"></p>`;
+    // eventFour.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[3].images[0].url}"></p>`;
+    $("#eventFour").attr("style", `background-image: url('${jsonData._embedded.events[3].images[2].url}') ` )
 }
 
 function displayEventFive(jsonData){
     var eventFive = document.querySelector('#eventFive');
     eventFive.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[4].name}</p>`;
-    eventFive.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[4].images[0].url}"></p>`;
+    // eventFive.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[4].images[0].url}"></p>`;
+    $("#eventFive").attr("style", `background-image: url('${jsonData._embedded.events[4].images[2].url}') ` )
 }
 
 function displayEventSix(jsonData){
     var eventSix = document.querySelector('#eventSix');
     eventSix.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[5].name}</p>`;
-    eventSix.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[5].images[0].url}"></p>`;
+    // eventSix.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[5].images[0].url}"></p>`;
+    $("#eventSix").attr("style", `background-image: url('${jsonData._embedded.events[5].images[0].url}') ` )
 }
 
 function displayEventSeven(jsonData){
     var eventSeven = document.querySelector('#eventSeven');
     eventSeven.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[6].name}</p>`;
-    eventSeven.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[6].images[0].url}"></p>`;
+    // eventSeven.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[6].images[0].url}"></p>`;
+    $("#eventSeven").attr("style", `background-image: url('${jsonData._embedded.events[6].images[0].url}') ` )
 }
 
 function displayEventEight(jsonData){
     var eventEight = document.querySelector('#eventEight');
     eventEight.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[7].name}</p>`;
-    eventEight.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[7].images[0].url}"></p>`;  
+    // eventEight.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[7].images[0].url}"></p>`;
+    $("#eventEight").attr("style", `background-image: url('${jsonData._embedded.events[7].images[1].url}') ` )
 }
 
 function displayEventNine(jsonData){
     var eventNine = document.querySelector('#eventNine');
     eventNine.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[8].name}</p>`;
-    eventNine.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[8].images[0].url}"></p>`;
-
+    // eventNine.innerHTML += `<p class="eventDisplay"><img height="auto" width=200" src="${jsonData._embedded.events[8].images[0].url}"></p>`;
+    $("#eventNine").attr("style", `background-image: url('${jsonData._embedded.events[8].images[4].url}') ` )
 }
 
 // Set global variables
