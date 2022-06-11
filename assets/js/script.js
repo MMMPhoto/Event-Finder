@@ -10,8 +10,11 @@ function handleSearch() {
     var year = document.querySelector('#yearInput').value;
     var month = document.querySelector('#monthInput').value;
     var radius = document.querySelector('#radiusInput').value;
-    
-   info.innerHTML= `<br><u>Event Info</u>`
+
+    // Resets the right side info text area when another event is searched
+    info.innerHTML = `<br><u>Event Info</u>`
+
+    // API fetch
     let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`
 
     fetch(url).then(data => data.json()).then(data => {
@@ -19,7 +22,6 @@ function handleSearch() {
         jsonData = data;
         displayEvents(jsonData);
     })
-
 }
 
 function displayEvents(jsonData) {
@@ -31,22 +33,22 @@ function displayEvents(jsonData) {
     var genre = document.querySelector('#genreInput').value;
 
     //Changes the event header to the user's city and genre selection
-    if(genre == "Musicals"){
+    if (genre == "Musicals") {
         eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
-    }else{
-    eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
+    } else {
+        eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
     }
+
     for (var x = 0; x < 9; x++) {
-        
-        //Sets the text area for the corresponding event 
-        var eventDisplay = document.querySelector(`#event${x+1}`);
-        
+
+        //Targets the text area for the corresponding event 
+        var eventDisplay = document.querySelector(`#event${x + 1}`);
+
         //Sets array for the date to rearrange it to be in mm/dd/yyyy format
         var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
-       
         var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
-        
-        
+
+        // Generates each listed event
         eventDisplay.innerHTML = `<button class="saveButton">Save</button>`
         eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`
         eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`
@@ -55,16 +57,15 @@ function displayEvents(jsonData) {
         eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`
 
     }
-    
+
 }
 
+// Function for display info on the right side of screen
+function displayData(value) {
 
-function displayData(value){
-   
     var x = value
     var info = document.getElementById('infoDisplay');
-    
-    
+
     info.innerHTML = `<p><b>${jsonData._embedded.events[x].name}</b></p>`
     info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`
     info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`
