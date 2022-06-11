@@ -8,9 +8,15 @@ function handleSearch(){
     var genre = document.querySelector('#genreInput').value;
     var family = document.querySelector('#familyInput').value;
     
-console.log(city);
+    console.log(city);
+    let url;
 
-    let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&city=${city}&classificationName=${genre}&includeFamily=${family}&apikey=${apiKey}`
+    if (city == 'User Location') {
+        let userLatLon = `${userLat},${userLon}`;  
+        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&latlong=${userLatLon}&radius=5&unit=miles&startDateTime=2022-06-25T14:00:00Z&classificationName=${genre}&includeFamily=${family}&apikey=${apiKey}&sort=date,asc`;
+    } else {
+        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&city=${city}&classificationName=${genre}&includeFamily=${family}&apikey=${apiKey}`;
+    };
 
 fetch(url).then (data=>data.json()).then (data =>{
 
