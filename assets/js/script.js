@@ -1,5 +1,4 @@
 var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ"
-
 var eventSubmit = document.querySelector(".event");
 
 function handleSearch() {

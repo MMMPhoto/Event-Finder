@@ -1,3 +1,7 @@
+#map {
+    height: 500px;
+}
+
 html {
    background-color: lightgray;
   }
@@ -32,7 +36,6 @@ html {
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
     display: flex;
   }
-  
   nav ul {
     list-style-type: none;
     padding: 0;
@@ -295,6 +298,3 @@ html {
    left:0;
    right:0;
  }
-
- 
-  
