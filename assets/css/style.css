@@ -1,3 +1,7 @@
+#map {
+    height: 500px;
+}
+
 html {
    background-color: lightgray;
   }
@@ -20,6 +24,7 @@ html {
     background-position-y: center;
     background-size:cover;
     /* height:300px; */
+
   }
   
   
@@ -32,7 +37,6 @@ html {
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
     display: flex;
   }
-  
   nav ul {
     list-style-type: none;
     padding: 0;
@@ -156,6 +160,7 @@ html {
 
  
 /* Header for middle area of page where events are shown */
+
  #eventHeader{
      color:white;
      text-align: center;
@@ -184,6 +189,7 @@ html {
   font-size: 16pt;
   border-radius: 5px;
 }
+
  #familyInput{
     /* width: 104px; */
     font-size: 16pt;
@@ -295,6 +301,3 @@ html {
    left:0;
    right:0;
  }
-
- 
-  
