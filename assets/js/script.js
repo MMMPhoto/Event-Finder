@@ -2,7 +2,7 @@ var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ"
 var eventSubmit = document.querySelector(".event");
 
 function handleSearch() {
-
+    var info = document.getElementById('info');
     var city = document.querySelector('#cityInput').value;
     var genre = document.querySelector('#genreInput').value;
     // var family = document.querySelector('#familyInput').value;
@@ -11,7 +11,7 @@ function handleSearch() {
     var month = document.querySelector('#monthInput').value;
     var radius = document.querySelector('#radiusInput').value;
     
-   
+   info.innerHTML= `<br><u>Event Info</u>`
     let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`
 
     fetch(url).then(data => data.json()).then(data => {
@@ -47,8 +47,8 @@ function displayEvents(jsonData) {
         var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
         
         
-        
-        eventDisplay.innerHTML = `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`
+        eventDisplay.innerHTML = `<button class="saveButton">Save</button>`
+        eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`
         eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`
         eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
         // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;

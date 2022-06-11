@@ -25,6 +25,7 @@ html {
     padding: 20px;
     margin-right: 5px;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+    display: flex;
     
   }
   
@@ -63,6 +64,8 @@ html {
     border-radius:5px;
     padding:10px;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+    
+    width: 100%;
 
   }
  
@@ -84,7 +87,7 @@ html {
      font-size: 24px;
      text-align: center;
      color:white;
-     padding:5px;
+     /* padding:5px; */
      position: relative;
  }
 
@@ -102,7 +105,14 @@ html {
    color:white;
    border-radius: 5px;
   background-color: #12232E;
+  border-color:white;
+  border-style:solid;
+  justify-content: center;
+  
  }
+ #submit:hover{
+  background-color: #4DA8DA;
+}
 
  .infoButton{
    font-size: 16pt;
@@ -121,6 +131,27 @@ html {
  .infoButton:hover{
    background-color: #4DA8DA;
  }
+
+ .saveButton{
+  font-size: 16pt;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #12232E;
+  color:white;
+  border:white;
+  border-style: solid;
+  border-width:1px;
+  width: 100%;
+  border-top:none;
+  border-right: none;;
+  border-left:none;
+  top:0;
+}
+.saveButton:hover{
+  background-color: #4DA8DA;
+}
+
+ 
 
  #eventHeader{
      color:white;
@@ -264,4 +295,6 @@ html {
    left:0;
    right:0;
  }
+
+ 
   
