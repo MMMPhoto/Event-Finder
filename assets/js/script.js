@@ -13,6 +13,7 @@ function handleSearch() {
 
     // Resets the right side info text area when another event is searched
     info.innerHTML = `<br><u>Event Info</u>`
+    
 
     // API fetch
     console.log(city);
@@ -49,7 +50,7 @@ function displayEvents(jsonData) {
         eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
     };
 
-    for (var x = 0; x < jsonData._embedded.events.length; x++) {
+    for (var x = 0; x < 9; x++) {
 
         //Targets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x + 1}`);
