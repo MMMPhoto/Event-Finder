@@ -114,6 +114,7 @@ html {
   background-color: #12232E;
   border-color:white;
   border-style:solid;
+  place-items: center;
  }
  #submit:hover{
   background-color: #4DA8DA;
