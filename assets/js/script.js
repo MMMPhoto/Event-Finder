@@ -19,7 +19,7 @@ function handleSearch() {
     let url;
     // Checks if User location is being used instead of city
     if (city == 'User Location') {
-        let userLatLon = `${userLat},${userLon}`;  
+        let userLatLon = `${userLat},${userLon}`;
         url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
         url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
@@ -126,4 +126,51 @@ let addEventMarkers = (jsonData) => {
         eventLayerGroup.addLayer(marker);
     };
     map.fitBounds(eventLayerGroup.getBounds());
+    generateRouting(userLat, userLon);
+
 };
+
+// Create routing on map
+let generateRouting = (userLat, userLon) => {
+    L.Routing.control({
+        waypoints: [
+            L.latLng(userLat, userLon),
+            L.latLng(33.8261112, -84.2924226)
+        ]
+    }).addTo(map);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let generateRouting = () => {
+//     L.leafletControlRoutingtoaddress({
+//         position: 'topright',
+//         router: 'osrm',
+//         token: '',
+//         placeholder: 'Please insert your address here.',
+//         errormessage: 'Address not valid.',
+//         distance: 'Distance:',
+//         duration: 'Driving Time:',
+//         target: `${userLat},${userLon}`,
+//         requesterror: '"Too Many Requests" or "Not Authorized - Invalid Token"'
+//     }).addTo(map);
+// };
