@@ -20,9 +20,9 @@ function handleSearch() {
     // Checks if User location is being used instead of city
     if (city == 'User Location') {
         let userLatLon = `${userLat},${userLon}`;  
-        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
+        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
-        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
+        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
     };
 
     fetch(url).then(data => data.json()).then(data => {
@@ -49,7 +49,7 @@ function displayEvents(jsonData) {
         eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
     };
 
-    for (var x = 0; x < 9; x++) {
+    for (var x = 0; x < jsonData._embedded.events.length; x++) {
 
         //Targets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x + 1}`);
@@ -77,13 +77,19 @@ function displayData(value) {
     var info = document.getElementById('infoDisplay');
     var venue = jsonData._embedded.events[x]._embedded.venues[0].name
     var name = jsonData._embedded.events[x].name
-    var minPrice = jsonData._embedded.events[x].priceRanges[0].min;
-   var maxPrice = jsonData._embedded.events[x].priceRanges[0].max
-   
     info.innerHTML = `<p><b>` + name + `</b></p>`
     info.innerHTML += `<p><u>Venue</u> <br>` + venue + `</p>`
-    info.innerHTML += `<p><u>Price Range</u><br>$` + minPrice + ` to ` + `$` + maxPrice + `</p>`
-
+    if(jsonData._embedded.events[x].priceRanges != undefined){
+           maxPrice = jsonData._embedded.events[x].priceRanges[0].max;
+           minPrice = jsonData._embedded.events[x].priceRanges[0].min;
+           info.innerHTML += `<p><u>Price Range</u><br>$` + minPrice + ` to ` + `$` + maxPrice + `</p>`
+    }else{
+        info.innerHTML += `<p><u>Price Range</u><br>Ticket price not available</p>`
+    }
+    
+   
+    
+    
 }
 
 // Set global map variables
