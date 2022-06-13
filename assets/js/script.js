@@ -65,8 +65,8 @@ function displayData(value) {
   var info = document.getElementById("infoDisplay");
 
   info.innerHTML = `<h4><b>${jsonData._embedded.events[x].name}</b></h4>`;
-  info.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
-  info.innerHTML += `<p><u>Info</u> <br><span id="infoBar"></span></p>`;
+  info.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
+  info.innerHTML += `<p id="infoBar"></p>`;
   info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`;
   info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`;
 
@@ -78,7 +78,11 @@ function displayData(value) {
     .then((data) => data.json())
     .then((data) => {
       addInfo = data;
-      infoBar.innerHTML = `${addInfo.info}`;
+      console.log(addInfo);
+      infoBar.innerHTML = `<u>Info</u>` + `<br>${addInfo.info}`;
+      if (`${addInfo.info}` === "undefined") {
+        infoBar.innerHTML = "";
+      }
     });
 }
 
