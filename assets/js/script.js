@@ -67,10 +67,14 @@ function displayData(value) {
   info.innerHTML = `<h4><b>${jsonData._embedded.events[x].name}</b></h4>`;
   info.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
   info.innerHTML += `<p id="infoBar"></p>`;
-  info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`;
-  info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`;
+  info.innerHTML += `<p><u>Venue</u>: <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`;
+  info.innerHTML += `<p><u>Price Range</u>:<br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`;
+  info.innerHTML += `<p id="pleaseNote"></p>`;
+  info.innerHTML += `<p id="ticketLimit"></p>`;
 
+  let ticketLimit = document.getElementById("ticketLimit");
   let infoBar = document.getElementById("infoBar");
+  let pleaseNote = document.getElementById("pleaseNote");
   let id = jsonData._embedded.events[x].id;
   let url = `https://app.ticketmaster.com/discovery/v2/events/${id}.json?apikey=${apiKey}`;
 
@@ -79,9 +83,19 @@ function displayData(value) {
     .then((data) => {
       addInfo = data;
       console.log(addInfo);
-      infoBar.innerHTML = `<u>Info</u>` + `<br>${addInfo.info}`;
+      infoBar.innerHTML = `<u>Info</u>:` + `<br>${addInfo.info}`;
       if (`${addInfo.info}` === "undefined") {
         infoBar.innerHTML = "";
+      }
+      pleaseNote.innerHTML +=
+        `<p><u>Please Note</u>:<br>` + `${addInfo.pleaseNote}`;
+      if (`${addInfo.pleaseNote}` === "undefined") {
+        pleaseNote.innerHTML = "";
+      }
+      ticketLimit.innerHTML +=
+        `<p><u>Ticket Limit</u>:<br>` + `${addInfo.ticketLimit.info}`;
+      if (`${addInfo.ticketLimit}` === "undefined") {
+        ticketLimit.innerHTML = "";
       }
     });
 }
