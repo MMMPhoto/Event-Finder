@@ -281,7 +281,7 @@ html {
   color:white;
   border-radius: 5px;
   margin-left: 5px;
-  font-size: 18pt;
+  font-size: 14pt;
   text-align: center;
   display: flex;
  }
@@ -293,8 +293,8 @@ html {
   align-items: center;
   width:100%;
  }
- #infoBar {
-  margin: 0% 1%;
+ #infoBar, #pleaseNote{
+  margin: 0% 2%;
  }
 
  /* Styling for setting the Buy Tickets and Info button to bottom of the div */
