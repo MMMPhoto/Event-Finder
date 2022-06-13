@@ -20,7 +20,6 @@ html {
     background-position-y: center;
     background-size:cover;
     /* height:300px; */
-
   }
   
   
@@ -111,6 +110,7 @@ html {
   background-color: #12232E;
   border-color:white;
   border-style:solid;
+  place-items: center;
  }
  #submit:hover{
   background-color: #4DA8DA;
@@ -156,7 +156,6 @@ html {
 
  
 /* Header for middle area of page where events are shown */
-
  #eventHeader{
      color:white;
      text-align: center;
@@ -185,7 +184,6 @@ html {
   font-size: 16pt;
   border-radius: 5px;
 }
-
  #familyInput{
     /* width: 104px; */
     font-size: 16pt;

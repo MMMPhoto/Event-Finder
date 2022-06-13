@@ -13,6 +13,7 @@ function handleSearch() {
 
     // Resets the right side info text area when another event is searched
     info.innerHTML = `<br><u>Event Info</u>`
+    
 
     // API fetch
     console.log(city);
@@ -20,9 +21,10 @@ function handleSearch() {
     // Checks if User location is being used instead of city
     if (city == 'User Location') {
         let userLatLon = `${userLat},${userLon}`;  
-        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
+        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
-        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
+        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
+
     };
 
     fetch(url).then(data => data.json()).then(data => {
@@ -35,13 +37,15 @@ function handleSearch() {
 };
 
 function displayEvents(jsonData) {
+    var eventHeader = document.querySelector('#eventHeader')
+   
     //This element begins as display: none. Changes it to flex when submit button is pressed
     document.getElementById("eventList").style.display = "flex";
 
-    var eventHeader = document.querySelector('#eventHeader')
+    
     var city = document.querySelector('#cityInput').value;
     var genre = document.querySelector('#genreInput').value;
-
+    
     //Changes the event header to the user's city and genre selection
     if (genre == "Musicals") {
         eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
@@ -55,6 +59,7 @@ function displayEvents(jsonData) {
         var eventDisplay = document.querySelector(`#event${x + 1}`);
 
         //Sets array for the date to rearrange it to be in mm/dd/yyyy format
+        
         var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
         var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
 
@@ -65,8 +70,10 @@ function displayEvents(jsonData) {
         eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
         // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
         eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
-
+        
     };
+
+
 
 }
 
@@ -76,9 +83,17 @@ function displayData(value) {
     var x = value;
     var info = document.getElementById('infoDisplay');
 
-    info.innerHTML = `<p><b>${jsonData._embedded.events[x].name}</b></p>`;
-    info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`;
-    info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`;
+    var venue = jsonData._embedded.events[x]._embedded.venues[0].name
+    var name = jsonData._embedded.events[x].name
+    info.innerHTML = `<p><b>` + name + `</b></p>`
+    info.innerHTML += `<p><u>Venue</u> <br>` + venue + `</p>`
+    if(jsonData._embedded.events[x].priceRanges != undefined){
+           maxPrice = jsonData._embedded.events[x].priceRanges[0].max;
+           minPrice = jsonData._embedded.events[x].priceRanges[0].min;
+           info.innerHTML += `<p><u>Price Range</u><br>$` + Math.round(minPrice) + ` to ` + `$` + Math.round(maxPrice) + `</p>`
+    }else{
+        info.innerHTML += `<p><u>Price Range</u><br>Ticket price not available</p>`
+    }
 
 }
 
