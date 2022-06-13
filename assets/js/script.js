@@ -82,7 +82,7 @@ function displayData(value) {
     if(jsonData._embedded.events[x].priceRanges != undefined){
            maxPrice = jsonData._embedded.events[x].priceRanges[0].max;
            minPrice = jsonData._embedded.events[x].priceRanges[0].min;
-           info.innerHTML += `<p><u>Price Range</u><br>$` + minPrice + ` to ` + `$` + maxPrice + `</p>`
+           info.innerHTML += `<p><u>Price Range</u><br>$` + Math.round(minPrice) + ` to ` + `$` + Math.round(maxPrice) + `</p>`
     }else{
         info.innerHTML += `<p><u>Price Range</u><br>Ticket price not available</p>`
     }
