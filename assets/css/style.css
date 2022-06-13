@@ -204,10 +204,14 @@ html {
 #eventOne, #eventTwo, #eventThree, #eventFour, #eventFive, #eventSix, #eventSeven, #eventEight, #eventNine{
   color: antiquewhite;
   border-color: antiquewhite;
+  padding: 10px 10px 10px 10px;
   /* background-image: url('https://s1.ticketm.net/dam/a/c90/67a18d21-394f-4afe-84f9-15560d797c90_1652911_RETINA_LANDSCAPE_16_9.jpg') ; */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  transition: 0.2s all ease-in-out;
 }
 
-
+#eventOne:hover, #eventTwo:hover, #eventThree:hover, #eventFour:hover, #eventFive:hover, #eventSix:hover, #eventSeven:hover, #eventEight:hover, #eventNine:hover {
+  transform: scale(1.5)
+}
