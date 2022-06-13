@@ -1,4 +1,4 @@
-var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ"
+var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ";
 var eventSubmit = document.querySelector(".event");
 
 function handleSearch() {
@@ -15,14 +15,24 @@ function handleSearch() {
     info.innerHTML = `<br><u>Event Info</u>`
 
     // API fetch
-    let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`
+    console.log(city);
+    let url;
+    // Checks if User location is being used instead of city
+    if (city == 'User Location') {
+        let userLatLon = `${userLat},${userLon}`;  
+        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
+    } else {
+        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
+    };
 
     fetch(url).then(data => data.json()).then(data => {
 
         jsonData = data;
+        console.log(jsonData);
         displayEvents(jsonData);
-    })
-}
+        addEventMarkers(jsonData);
+    });
+};
 
 function displayEvents(jsonData) {
     //This element begins as display: none. Changes it to flex when submit button is pressed
@@ -37,9 +47,9 @@ function displayEvents(jsonData) {
         eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
     } else {
         eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
-    }
+    };
 
-    for (var x = 0; x < 9; x++) {
+    for (var x = 0; x < jsonData._embedded.events.length; x++) {
 
         //Targets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x + 1}`);
@@ -49,32 +59,44 @@ function displayEvents(jsonData) {
         var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
 
         // Generates each listed event
-        eventDisplay.innerHTML = `<button class="saveButton">Save</button>`
-        eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`
-        eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`
+        eventDisplay.innerHTML = `<button class="saveButton">Save</button>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
         eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
         // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
-        eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`
+        eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
 
-    }
+    };
 
 }
 
 // Function for display info on the right side of screen
 function displayData(value) {
 
-    var x = value
+    var x = value;
     var info = document.getElementById('infoDisplay');
-
-    info.innerHTML = `<p><b>${jsonData._embedded.events[x].name}</b></p>`
-    info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`
-    info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`
-
+    var venue = jsonData._embedded.events[x]._embedded.venues[0].name
+    var name = jsonData._embedded.events[x].name
+    info.innerHTML = `<p><b>` + name + `</b></p>`
+    info.innerHTML += `<p><u>Venue</u> <br>` + venue + `</p>`
+    if(jsonData._embedded.events[x].priceRanges != undefined){
+           maxPrice = jsonData._embedded.events[x].priceRanges[0].max;
+           minPrice = jsonData._embedded.events[x].priceRanges[0].min;
+           info.innerHTML += `<p><u>Price Range</u><br>$` + minPrice + ` to ` + `$` + maxPrice + `</p>`
+    }else{
+        info.innerHTML += `<p><u>Price Range</u><br>Ticket price not available</p>`
+    }
+    
+   
+    
+    
 }
 
-// Set global variables
+// Set global map variables
 let userLat;
 let userLon;
+let map;
+let eventLayerGroup;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
@@ -91,7 +113,7 @@ navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
 // Generate map
 let generateMap = (userLat, userLon) => {
-    map = L.map('map').setView([userLat, userLon], 13);
+    map = L.map('map').setView([userLat, userLon], 11);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
@@ -99,7 +121,19 @@ let generateMap = (userLat, userLon) => {
 };
 // Generate user location marker
 let addUserMarker = (userLat, userLon) => {
-    L.marker([userLat, userLon]).addTo(map);
+    L.marker([userLat, userLon]).addTo(map).bindTooltip('You are here');      
 };
-
-
+// Generate event location marker
+let addEventMarkers = (jsonData) => {
+    if (typeof eventLayerGroup !== 'undefined') {
+        eventLayerGroup.clearLayers();
+    };
+    eventLayerGroup = L.featureGroup().addTo(map);
+    for (i = 0; i < jsonData._embedded.events.length; i++) {
+        let venueLat = jsonData._embedded.events[i]._embedded.venues[0].location.latitude;
+        let venueLon = jsonData._embedded.events[i]._embedded.venues[0].location.longitude;
+        marker = L.marker([venueLat, venueLon]).bindTooltip(`${jsonData._embedded.events[i].name}<br>${jsonData._embedded.events[i]._embedded.venues[0].name}`);
+        eventLayerGroup.addLayer(marker);
+    };
+    map.fitBounds(eventLayerGroup.getBounds());
+};
