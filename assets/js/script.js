@@ -17,6 +17,13 @@ function handleSearch() {
     // API fetch
     let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`
 
+    // IF statement to catch if a data isn't entered for the search that returns alert, "Please enter a full date"
+    
+   if(!day || !year || !month){
+      return window.alert("please enter a full date")
+   }
+
+
     fetch(url).then(data => data.json()).then(data => {
 
         jsonData = data;
@@ -47,7 +54,8 @@ function displayEvents(jsonData) {
         //Sets array for the date to rearrange it to be in mm/dd/yyyy format
         var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
         var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
-
+        console.log(jsonData._embedded.events[x]
+            )
         // Generates each listed event
         eventDisplay.innerHTML = `<button class="saveButton">Save</button>`
         eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`
@@ -55,9 +63,10 @@ function displayEvents(jsonData) {
         eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
         // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
         eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`
-
+        //Call function to get all Save buttons
+        
     }
-
+    addSaveListeners();
 }
 
 // Function for display info on the right side of screen
@@ -69,7 +78,26 @@ function displayData(value) {
     info.innerHTML = `<p><b>${jsonData._embedded.events[x].name}</b></p>`
     info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`
     info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`
+    
+}
+//Function to get all save buttons
+function addSaveListeners(){
+    // find all the save buttons
+    var allSavebuttons = document.getElementsByClassName("saveButton");
+    //console.log(allSavebuttons)
+    for(i=0;i<allSavebuttons.length; i++){
+        var title = allSavebuttons[i].nextElementSibling.textContent
+        console.log(title)
+        allSavebuttons[i].addEventListener("click", addLocalStorage.bind(null,title))
+    }
+    // find the event name or the event date
+    // Add that to local storage
+}
 
+function addLocalStorage(input){
+    console.log("title " + input)
+    localStorage.setItem("selectedTitle", input);
+    
 }
 
 // Set global variables
