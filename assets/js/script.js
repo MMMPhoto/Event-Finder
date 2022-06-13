@@ -126,4 +126,51 @@ let addEventMarkers = (jsonData) => {
         eventLayerGroup.addLayer(marker);
     };
     map.fitBounds(eventLayerGroup.getBounds());
+    generateRouting(userLat, userLon);
+
 };
+
+// Create routing on map
+let generateRouting = (userLat, userLon) => {
+    L.Routing.control({
+        waypoints: [
+            L.latLng(userLat, userLon),
+            L.latLng(33.8261112, -84.2924226)
+        ]
+    }).addTo(map);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let generateRouting = () => {
+//     L.leafletControlRoutingtoaddress({
+//         position: 'topright',
+//         router: 'osrm',
+//         token: '',
+//         placeholder: 'Please insert your address here.',
+//         errormessage: 'Address not valid.',
+//         distance: 'Distance:',
+//         duration: 'Driving Time:',
+//         target: `${userLat},${userLon}`,
+//         requesterror: '"Too Many Requests" or "Not Authorized - Invalid Token"'
+//     }).addTo(map);
+// };
