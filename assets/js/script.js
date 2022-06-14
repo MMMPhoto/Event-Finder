@@ -43,6 +43,7 @@ function displayEvents(jsonData) {
 
     
     var city = document.querySelector('#cityInput').value;
+   
     var genre = document.querySelector('#genreInput').value;
     
     //Changes the event header to the user's city and genre selection
@@ -52,13 +53,12 @@ function displayEvents(jsonData) {
         eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
     };
    
-    for (var x = 0; x < 9; x++) {
+    for (var x = 0; x <=8 ; x++) {
 
         //Targets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x + 1}`);
 
         //Sets array for the date to rearrange it to be in mm/dd/yyyy format
-        
         var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
         var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
 
@@ -67,12 +67,9 @@ function displayEvents(jsonData) {
         eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
         eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
         eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
-        // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
         eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
         
     };
-
-
 }
 
 // Function for display info on the right side of screen
@@ -90,11 +87,7 @@ function displayData(value) {
            info.innerHTML += `<p><u>Price Range</u><br>$` + Math.round(minPrice) + ` to ` + `$` + Math.round(maxPrice) + `</p>`
     }else{
         info.innerHTML += `<p><u>Price Range</u><br>Ticket price not available</p>`
-    }
-    
-   
-    
-    
+    }  
 }
 
 // Set global map variables
