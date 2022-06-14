@@ -65,8 +65,8 @@ function displayEvents(jsonData) {
 
         // Generates each listed event
         eventDisplay.innerHTML = `<button class="saveButton">Save</button>`;
-        eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
-        eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay" p id= "eventName">${jsonData._embedded.events[x].name}</p>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay" p id= "eventDate">${date}</p>`;
         $(`#event${x + 1}`).attr("style", `background-image: url('${jsonData._embedded.events[x].images[2].url}') ` )
         // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
         eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
