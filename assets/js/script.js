@@ -43,6 +43,9 @@ function displayEvents(jsonData) {
     var genre = document.querySelector('#genreInput').value;
 
     //Changes the event header to the user's city and genre selection
+    if (city == 'User Location') {
+        city = 'Nearby';
+    };
     if (genre == "Musicals") {
         eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
     } else {
@@ -68,18 +71,26 @@ function displayEvents(jsonData) {
 
     };
 
-}
+};
 
 // Function for display info on the right side of screen
 function displayData(value) {
 
     var x = value;
     var info = document.getElementById('infoDisplay');
+    let directionsButton = document.createElement('div');
+    let venueLat = `${jsonData._embedded.events[x]._embedded.venues[0].location.latitude}`;
+    let venueLon = `${jsonData._embedded.events[x]._embedded.venues[0].location.longitude}`;
+    
 
     info.innerHTML = `<p><b>${jsonData._embedded.events[x].name}</b></p>`;
     info.innerHTML += `<p><u>Venue</u> <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`;
     info.innerHTML += `<p><u>Price Range</u><br>$${jsonData._embedded.events[x].priceRanges[0].min} to $${jsonData._embedded.events[x].priceRanges[0].max}</p>`;
-
+    // Add Button to get directions
+    // info.appendChild(directionsButton);
+    // directionsButton.innerHTML = `<button class="directionsButton" >Get Directions</button>`;
+    // console.log(`venue lat lon is ${venueLat}, ${venueLon}`);
+    // generateRouting(userLat, userLon);
 }
 
 // Set global map variables
@@ -126,20 +137,22 @@ let addEventMarkers = (jsonData) => {
         eventLayerGroup.addLayer(marker);
     };
     map.fitBounds(eventLayerGroup.getBounds());
-    generateRouting(userLat, userLon);
-
 };
 
 // Create routing on map
-let generateRouting = (userLat, userLon) => {
-    L.Routing.control({
-        waypoints: [
-            L.latLng(userLat, userLon),
-            L.latLng(33.8261112, -84.2924226)
-        ]
-    }).addTo(map);
-
-}
+// let generateRouting = (userLat, userLon) => {
+//     // let graphHopperApiKey = '82f0f7e0-f73e-41bb-a6fb-f32fb15245dd'
+//     L.Routing.control({
+//         waypoints: [
+//             L.latLng(userLat, userLon),
+//             L.latLng(33.8261112, -84.2924226)
+//         ],
+//         lineOptions: {
+//             styles: [{color: 'black'}]
+//         },
+//         // router: L.Routing.graphHopper('82f0f7e0-f73e-41bb-a6fb-f32fb15245dd')
+//     }).addTo(map);
+// };
 
 
 
