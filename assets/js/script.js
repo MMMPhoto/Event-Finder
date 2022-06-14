@@ -107,11 +107,14 @@ function displayData(value) {
         onSale.innerHTML = "<p><u>Tickets Available</u>?<br>No";
       }
     });
+
 }
 
-// Set global variables
+// Set global map variables
 let userLat;
 let userLon;
+let map;
+let eventLayerGroup;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
@@ -128,13 +131,27 @@ navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
 // Generate map
 let generateMap = (userLat, userLon) => {
-  map = L.map("map").setView([userLat, userLon], 13);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: "© OpenStreetMap",
-  }).addTo(map);
+    map = L.map('map').setView([userLat, userLon], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
 };
 // Generate user location marker
 let addUserMarker = (userLat, userLon) => {
-  L.marker([userLat, userLon]).addTo(map);
+    L.marker([userLat, userLon]).addTo(map).bindTooltip('You are here');      
+};
+// Generate event location marker
+let addEventMarkers = (jsonData) => {
+    if (typeof eventLayerGroup !== 'undefined') {
+        eventLayerGroup.clearLayers();
+    };
+    eventLayerGroup = L.featureGroup().addTo(map);
+    for (i = 0; i < jsonData._embedded.events.length; i++) {
+        let venueLat = jsonData._embedded.events[i]._embedded.venues[0].location.latitude;
+        let venueLon = jsonData._embedded.events[i]._embedded.venues[0].location.longitude;
+        marker = L.marker([venueLat, venueLon]).bindTooltip(`${jsonData._embedded.events[i].name}<br>${jsonData._embedded.events[i]._embedded.venues[0].name}`);
+        eventLayerGroup.addLayer(marker);
+    };
+    map.fitBounds(eventLayerGroup.getBounds());
 };
