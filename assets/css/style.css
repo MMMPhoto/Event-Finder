@@ -14,14 +14,86 @@ html {
     font-size: 35px;
     color: white;
     border-radius: 5px;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);  
+    align-items: center;
+    justify-content: center;
     background-repeat: no-repeat ;
-    background-position-x:bottom;
+    background-position-x: bottom;
     background-position-y: center;
     background-size: cover;
+    position: relative;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
     /* height:300px; */
   }
   
+
+  .neon {
+    position: relative;
+    overflow: hidden;
+    filter: brightness(200%);
+}
+
+.text {
+    background-color: black;
+    color: white;
+    font-size: 180px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    user-select: none;
+    
+}
+
+.text::before {
+    content: attr(data-text);
+    position: absolute;
+    color: white;
+    filter: blur(0.02em);
+    mix-blend-mode: difference;
+    
+}
+
+.gradient {
+    position: absolute;
+    background: linear-gradient(45deg, #12232E , #007CC7, violet, #007CC7, #12232E);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    mix-blend-mode: multiply;
+    
+}
+
+.spotlight {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: -100%;
+    left: -100%;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(
+            circle,
+            white,
+            transparent 25%
+        ) center / 25% 25%,
+        radial-gradient(
+            circle,
+            white,
+            black 25%
+        ) center / 12.5% 12.5%;
+    animation: light 5s linear infinite;
+    mix-blend-mode: color-dodge;
+    
+}
+
+@keyframes light {
+    to {
+        transform: translate(50%, 50%);
+    }
+}
   
   nav {
     border-radius:5px;
