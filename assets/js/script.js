@@ -53,7 +53,7 @@ function displayEvents(jsonData) {
         eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
     };
 
-    for (var x = 0; x < 9; x++) {
+    for (var x = 0; x <= 8; x++) {
 
         //Targets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x + 1}`);
@@ -67,9 +67,9 @@ function displayEvents(jsonData) {
         eventDisplay.innerHTML = `<button class="saveButton">Save</button>`;
         eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
         eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
-        eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
+        $(`#event${x + 1}`).attr("style", `background-image: url('${jsonData._embedded.events[x].images[2].url}') ` )
         // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
-        eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
+        eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
         
     };
 

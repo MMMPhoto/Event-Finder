@@ -18,7 +18,7 @@ html {
     background-repeat: no-repeat ;
     background-position-x:bottom;
     background-position-y: center;
-    background-size:cover;
+    background-size: cover;
     /* height:300px; */
   }
   
@@ -74,14 +74,15 @@ html {
 
  /* Styling for each individual event generate*/
  .event{
-     flex-wrap:wrap;
+     display: flex;
+     flex-direction: column;
      background-color: #007CC7;
      justify-content: space-between;
      min-width: 200px;
-     width: 25%;
+     width: 250px;
      border-radius: 5px;
      box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-     height:auto;
+     height: 250px;;
      margin:10px;
      border-color:white;
      border-style:solid;
@@ -90,7 +91,14 @@ html {
      text-align: center;
      color:white;
      /* padding:5px; */
-     position: relative;
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     transition: 0.2s all ease-in-out;
+ }
+
+ .event:hover {
+   transform: scale(1.5)
  }
 
  /* Styling for the middle area where events are listed */
@@ -257,6 +265,20 @@ html {
    font-size: 14pt;
    text-align: center;
  }
+ p.eventDisplay{
+   margin-top: auto;
+   margin-bottom: 0px;
+   border-style: solid;
+   border-width: 1px;
+   border-radius: 20px;
+   border-color: white;
+   font-style: bold;
+   /* background-color: #12232E; */
+   /* opacity: 80% */
+   background-color:hsla(204 , 44% , 13%, 0.64);
+
+   
+ }
  .eventTickets a{
    font-size:12pt;
    color:white;
@@ -290,10 +312,8 @@ html {
 
  /* Styling for setting the Buy Tickets and Info button to bottom of the div */
  .setBottom{
-   position:absolute;
-   bottom:0;
-   left:0;
-   right:0;
+  margin-top: auto; 
+  
  }
  /* Map div styling */
  #map {
