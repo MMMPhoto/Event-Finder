@@ -299,6 +299,7 @@ html {
  }
  /* Map div styling */
  #map {
+    display: none;
     height: 500px;
     border-radius: 5px;
     border-style: solid;

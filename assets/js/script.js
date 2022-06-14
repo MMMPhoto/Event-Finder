@@ -42,9 +42,17 @@ function displayEvents(jsonData) {
     var city = document.querySelector('#cityInput').value;
     var genre = document.querySelector('#genreInput').value;
 
+
+    if (mapNotVisible) {
+        map.style.display = "block";
+        generateMap(userLat, userLon);
+        mapNotVisible = false;
+    };
     //Changes the event header to the user's city and genre selection
     if (city == 'User Location') {
         city = 'Nearby';
+        map.panTo(new L.LatLng(userLat, userLon));
+        addUserMarker(userLat, userLon);
     };
     if (genre == "Musicals") {
         eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
@@ -96,15 +104,14 @@ function displayData(value) {
 // Set global map variables
 let userLat;
 let userLon;
-let map;
+let map = document.getElementById('map');
+let mapNotVisible = true;
 let eventLayerGroup;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
     userLat = position.coords.latitude;
     userLon = position.coords.longitude;
-    generateMap(userLat, userLon);
-    addUserMarker(userLat, userLon);
     console.log(`User's position is: Lat: ${userLat}, Lon: ${userLon}`);
 };
 let positionError = (err) => {
@@ -136,7 +143,7 @@ let addEventMarkers = (jsonData) => {
         marker = L.marker([venueLat, venueLon]).bindTooltip(`${jsonData._embedded.events[i].name}<br>${jsonData._embedded.events[i]._embedded.venues[0].name}`);
         eventLayerGroup.addLayer(marker);
     };
-    map.fitBounds(eventLayerGroup.getBounds());
+    map.fitBounds(eventLayerGroup.getBounds().pad(0.5));
 };
 
 // Create routing on map
