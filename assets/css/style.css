@@ -1,327 +1,361 @@
 html {
-   background-color: lightgray;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  /* Style the header */
-  header {
-    background-color:  #12232E;
-    padding: 30px;
-    text-align: left;
-    font-size: 35px;
-    color: white;
-    border-radius: 5px;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);  
-    background-repeat: no-repeat ;
-    background-position-x:bottom;
-    background-position-y: center;
-    background-size: cover;
-    /* height:300px; */
-  }
-  
-  
-  nav {
-    border-radius:5px;
-    width: 30%;
-    background-color: #12232E;
-    padding: 20px;
-    margin-right: 5px;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-    display: flex;
-  }
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  article {
-    border-radius:5px;
-    padding: 20px;
-    width: 70%;
-    background-color: #12232E;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-  }
-  section{
-      margin-top:5px;
-      margin-bottom:5px;
-      display: flex;
-  }
- 
-  footer {
-    border-radius: 5px;
-    background-color: #12232E;
-    padding: 10px;
-    /* width: 100%; */
-    height:25px;
-    text-align: center;
-    color: white;
-  }
- 
-  /* Styling for left side search area */
-  .search{
-    background-color: #007CC7 ;
-    color:white;
-    font-size: 30px;
-    border-radius:5px;
-    padding:10px;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-    width: 100%;
-  }
- 
+  background-color: lightgray;
+}
 
- /* Styling for each individual event generate*/
- .event{
-     display: flex;
-     flex-direction: column;
-     background-color: #007CC7;
-     justify-content: space-between;
-     min-width: 200px;
-     width: 250px;
-     border-radius: 5px;
-     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-     height: 250px;;
-     margin:10px;
-     border-color:white;
-     border-style:solid;
-     border-width:1px;
-     font-size: 24px;
-     text-align: center;
-     color:white;
-     /* padding:5px; */
-     background-size: cover;
-     background-position: center;
-     background-repeat: no-repeat;
-     transition: 0.2s all ease-in-out;
- }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
- .event:hover {
-   transform: scale(1.5)
- }
-
- /* Styling for the middle area where events are listed */
- #eventList{
-     /* display:flex; */
-     display:none;
-     flex-wrap: wrap;
-     justify-content: center;  
- }
-
- /* Search submit button */
- #submit{
-   font-size: 20pt;
-   margin: 10px;
-   color:white;
-   border-radius: 5px;
+/* Style the header */
+header {
   background-color: #12232E;
-  border-color:white;
-  border-style:solid;
+  padding: 30px;
+  text-align: left;
+  font-size: 35px;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+  background-repeat: no-repeat;
+  background-position-x: bottom;
+  background-position-y: center;
+  background-size: cover;
+  /* height:300px; */
+}
+
+
+nav {
+  border-radius: 5px;
+  width: 30%;
+  background-color: #12232E;
+  padding: 20px;
+  margin-right: 5px;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+  display: flex;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  border-radius: 5px;
+  padding: 20px;
+  width: 70%;
+  background-color: #12232E;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
+
+section {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+}
+
+footer {
+  border-radius: 5px;
+  background-color: #12232E;
+  padding: 10px;
+  /* width: 100%; */
+  height: 25px;
+  text-align: center;
+  color: white;
+}
+
+/* Styling for left side search area */
+.search {
+  background-color: #007CC7;
+  color: white;
+  font-size: 30px;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+  width: 100%;
+}
+
+
+/* Styling for each individual event generate*/
+.event {
+  display: flex;
+  flex-direction: column;
+  background-color: #007CC7;
+  justify-content: space-between;
+  min-width: 200px;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+  height: 250px;
+  ;
+  margin: 10px;
+  border-color: white;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  /* padding:5px; */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: 0.2s all ease-in-out;
+}
+
+.event:hover {
+  transform: scale(1.5)
+}
+
+/* Styling for the middle area where events are listed */
+#eventList {
+  /* display:flex; */
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Search submit button */
+#submit {
+  font-size: 20pt;
+  margin: 10px;
+  color: white;
+  border-radius: 5px;
+  background-color: #12232E;
+  border-color: white;
+  border-style: solid;
   place-items: center;
- }
- #submit:hover{
+}
+
+#submit:hover {
   background-color: #4DA8DA;
 }
 
-/* Event info button styling */
- .infoButton{
-   font-size: 16pt;
-   border-bottom-left-radius: 5px;
-   border-bottom-right-radius: 5px;
-   background-color: #12232E;
-   color:white;
-   border:white;
-   border-style: solid;
-   border-width:1px;
-   width: 100%;
-   border-right: none;;
-   border-left:none;
- }
- .infoButton:hover{
-   background-color: #4DA8DA;
- }
+#saveTitle {
+  color: white;
+  text-shadow: 5px 5px 5px 10px red;
+  font-size: 20px;
+  padding: 10px 10px;
+  border: solid white;
+  border-radius: 5px;
+  background-color: #4DA8DA;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
 
- /* Save button on each individual event */
- .saveButton{
+/* Event info button styling */
+.infoButton {
+  font-size: 16pt;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: #12232E;
+  color: white;
+  border: white;
+  border-style: solid;
+  border-width: 1px;
+  width: 100%;
+  border-right: none;
+  ;
+  border-left: none;
+}
+
+.infoButton:hover {
+  background-color: #4DA8DA;
+}
+
+/* Save button on each individual event */
+.saveButton {
   font-size: 16pt;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background-color: #12232E;
-  color:white;
-  border:white;
+  color: white;
+  border: white;
   border-style: solid;
-  border-width:1px;
+  border-width: 1px;
   width: 100%;
-  border-top:none;
-  border-right: none;;
-  border-left:none;
-  top:0;
+  border-top: none;
+  border-right: none;
+  ;
+  border-left: none;
+  top: 0;
 }
-.saveButton:hover{
+
+.saveButton:hover {
   background-color: #4DA8DA;
 }
 
- 
+
 /* Header for middle area of page where events are shown */
- #eventHeader{
-     color:white;
-     text-align: center;
-     font-size: 36pt;
- }
+#eventHeader {
+  color: white;
+  text-align: center;
+  font-size: 36pt;
+}
 
- #searchHeader{
-   border-color:white;
-   border-style: solid;
-   background-color: #12232E;
-   padding:15px;
-   color: white;
-   text-align: center;
-   border-radius:5px;
-   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
- }
+#searchHeader {
+  border-color: white;
+  border-style: solid;
+  background-color: #12232E;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
 
- /* List of all input styles */
- #cityInput{
+/* List of all input styles */
+#cityInput {
   /* width:auto; */
   font-size: 16pt;
   border-radius: 5px;
 }
-#genreInput{
+
+#genreInput {
   /* width:auto; */
   font-size: 16pt;
   border-radius: 5px;
 }
- #familyInput{
-    /* width: 104px; */
-    font-size: 16pt;
-    border-radius: 5px;
- }
- #radiusInput{
+
+#familyInput {
+  /* width: 104px; */
+  font-size: 16pt;
+  border-radius: 5px;
+}
+
+#radiusInput {
   /* width: 218px; */
   font-size: 16pt;
   border-radius: 5px;
- }
- #monthInput{
-   border-radius: 5px;
-   width: 38px;  
-   font-size: 16pt;
- }
- #dayInput{
+}
+
+#monthInput {
   border-radius: 5px;
-  width: 38px;  
+  width: 38px;
   font-size: 16pt;
 }
-#yearInput{
+
+#dayInput {
   border-radius: 5px;
-  width: 50px;  
+  width: 38px;
   font-size: 16pt;
 }
- 
+
+#yearInput {
+  border-radius: 5px;
+  width: 50px;
+  font-size: 16pt;
+}
+
 /* List of all search button styles */
- #searchCity{
+#searchCity {
   border-radius: 5px;
   background-color: #4DA8DA;
-   padding:10px;
-   border-color:white;
-   border-style: solid;
-   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
- }
- #searchGenre{
-  border-radius: 5px;
-  background-color: #4DA8DA;
-   padding:10px;
-   border-color:white;
-   border-style: solid;
-   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
- }
- #searchFamily{
-  border-radius: 5px;
-  background-color: #4DA8DA;
-   padding:10px;
-   border-color:white;
-   border-style: solid;
-   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
- }
- #searchRadius{
-  border-radius: 5px;
-  background-color: #4DA8DA;
-   padding:10px;
-   border-color:white;
-   border-style: solid;
-   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
- }
- #searchDate{
-  border-radius: 5px;
-  background-color: #4DA8DA;
-   padding:10px;
-   border-color:white;
-   border-style: solid;
-   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
- }
+  padding: 10px;
+  border-color: white;
+  border-style: solid;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
 
- /* Event styles */
- .eventDisplay{
-   font-size: 14pt;
-   text-align: center;
- }
- p.eventDisplay{
-   margin-top: auto;
-   margin-bottom: 0px;
-   border-style: solid;
-   border-width: 1px;
-   border-radius: 20px;
-   border-color: white;
-   font-style: bold;
-   /* background-color: #12232E; */
-   /* opacity: 80% */
-   background-color:hsla(204 , 44% , 13%, 0.64);
+#searchGenre {
+  border-radius: 5px;
+  background-color: #4DA8DA;
+  padding: 10px;
+  border-color: white;
+  border-style: solid;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
 
-   
- }
- .eventTickets a{
-   font-size:12pt;
-   color:white;
-   text-decoration: none;
- }
- .eventTickets a:hover{
-  color:#12232E;
+#searchFamily {
+  border-radius: 5px;
+  background-color: #4DA8DA;
+  padding: 10px;
+  border-color: white;
+  border-style: solid;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
+
+#searchRadius {
+  border-radius: 5px;
+  background-color: #4DA8DA;
+  padding: 10px;
+  border-color: white;
+  border-style: solid;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
+
+#searchDate {
+  border-radius: 5px;
+  background-color: #4DA8DA;
+  padding: 10px;
+  border-color: white;
+  border-style: solid;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
+
+/* Event styles */
+.eventDisplay {
+  font-size: 14pt;
+  text-align: center;
+}
+
+p.eventDisplay {
+  margin-top: auto;
+  margin-bottom: 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+  border-color: white;
+  font-style: bold;
+  /* background-color: #12232E; */
+  /* opacity: 80% */
+  background-color: hsla(204, 44%, 13%, 0.64);
+
+
+}
+
+.eventTickets a {
+  font-size: 12pt;
+  color: white;
+  text-decoration: none;
+}
+
+.eventTickets a:hover {
+  color: #12232E;
   text-decoration: underline;
- }
+}
 
 /* Right side info styling */
- #info{
-  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+#info {
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
   background-color: #12232E;
-  width:20%;
-  color:white;
+  width: 20%;
+  color: white;
   border-radius: 5px;
   margin-left: 5px;
   font-size: 36pt;
   text-align: center;
   display: flex;
- }
- #infoDisplay{
+}
+
+#infoDisplay {
   background-color: #007CC7;
-  margin:15px;
-  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+  margin: 15px;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
   border-radius: 5px;
   align-items: center;
-  width:100%;
- }
+  width: 100%;
+}
 
- /* Styling for setting the Buy Tickets and Info button to bottom of the div */
- .setBottom{
-  margin-top: auto; 
-  
- }
- /* Map div styling */
- #map {
-    height: 500px;
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 10px;
-    border-color: #12232E;
-    padding: 10px;
-    margin-bottom: 5px;
- }
+/* Styling for setting the Buy Tickets and Info button to bottom of the div */
+.setBottom {
+  margin-top: auto;
+
+}
+
+/* Map div styling */
+#map {
+  height: 500px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 10px;
+  border-color: #12232E;
+  padding: 10px;
+  margin-bottom: 5px;
+}

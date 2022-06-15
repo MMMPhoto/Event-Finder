@@ -72,9 +72,8 @@ function displayEvents(jsonData) {
         eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
         
     };
-
-
-
+    addSaveListeners();
+     
 }
 
 // Function for display info on the right side of screen
@@ -97,6 +96,23 @@ function displayData(value) {
 
 }
 
+//function to get all save buttons from search results
+    function addSaveListeners() {
+        //variable set to find all the save buttons
+        var allSavebuttons = document.getElementsByClassName("saveButton")
+        //console.log(allSavebuttons)
+        for (i=0; i < allSavebuttons.length; i++) {
+            var title = allSavebuttons[i].nextElementSibling.textContent
+            //console.log(title)
+            allSavebuttons[i].addEventListener("click", addLocalStorage.bind(null,title))
+        }
+}
+    function addLocalStorage(input) {
+        //console.log(input)
+        localStorage.setItem("selectedTitle", input);
+        displayTitles()
+    }
+    
 // Set global map variables
 let userLat;
 let userLon;
@@ -142,3 +158,15 @@ let addEventMarkers = (jsonData) => {
     };
     map.fitBounds(eventLayerGroup.getBounds());
 };
+
+//Fucntion displays titles from local storage to left side of page
+function displayTitles() {
+    var saveTitles = document.getElementById("saveTitle")
+    var selectedTitle = localStorage.getItem("selectedTitle")
+    
+    if (selectedTitle !== null){
+        saveTitles.innerHTML += `<li>${selectedTitle}</li>`
+
+    }
+}
+displayTitles();
