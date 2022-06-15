@@ -24,6 +24,7 @@ function handleSearch() {
         url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
         url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
+
     };
 
     fetch(url).then(data => data.json()).then(data => {
@@ -52,8 +53,8 @@ function displayEvents(jsonData) {
     } else {
         eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
     };
-   
-    for (var x = 0; x <=8 ; x++) {
+
+    for (var x = 0; x < 9; x++) {
 
         //Targets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x + 1}`);
@@ -70,6 +71,9 @@ function displayEvents(jsonData) {
         eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
         
     };
+
+
+
 }
 
 // Function for display info on the right side of screen
@@ -77,6 +81,7 @@ function displayData(value) {
 
     var x = value;
     var info = document.getElementById('infoDisplay');
+
     var venue = jsonData._embedded.events[x]._embedded.venues[0].name
     var name = jsonData._embedded.events[x].name
     info.innerHTML = `<p><b>` + name + `</b></p>`
@@ -87,7 +92,8 @@ function displayData(value) {
            info.innerHTML += `<p><u>Price Range</u><br>$` + Math.round(minPrice) + ` to ` + `$` + Math.round(maxPrice) + `</p>`
     }else{
         info.innerHTML += `<p><u>Price Range</u><br>Ticket price not available</p>`
-    }  
+    }
+
 }
 
 // Set global map variables
