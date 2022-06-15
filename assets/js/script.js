@@ -1,87 +1,123 @@
 var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ";
 var eventSubmit = document.querySelector(".event");
+let x = 0;
+let y = 9;
 
 function handleSearch() {
-  var info = document.getElementById("infoDisplay");
-  var city = document.querySelector("#cityInput").value;
-  var genre = document.querySelector("#genreInput").value;
-  // var family = document.querySelector('#familyInput').value;
-  var day = document.querySelector("#dayInput").value;
-  var year = document.querySelector("#yearInput").value;
-  var month = document.querySelector("#monthInput").value;
-  var radius = document.querySelector("#radiusInput").value;
 
-  // Resets the right side info text area when another event is searched
-  info.innerHTML = `<br><u>Event Info</u>`;
+    var info = document.getElementById('infoDisplay');
+    var city = document.querySelector('#cityInput').value;
+    var genre = document.querySelector('#genreInput').value;
+    // var family = document.querySelector('#familyInput').value;
+    var day = document.querySelector('#dayInput').value;
+    var year = document.querySelector('#yearInput').value;
+    var month = document.querySelector('#monthInput').value;
+    var radius = document.querySelector('#radiusInput').value;
 
-  // API fetch
-  let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
+    // Resets the right side info text area when another event is searched
+    // info.innerHTML = `<br><u>Event Info</u>`
+    
+    // API fetch
+    console.log(city);
+    let url;
+    // Checks if User location is being used instead of city
+    if (city == 'User Location') {
+        let userLatLon = `${userLat},${userLon}`;  
+        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
+    } else {
+        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
 
-  fetch(url)
-    .then((data) => data.json())
-    .then((data) => {
-      jsonData = data;
-      displayEvents(jsonData);
-      console.log(jsonData);
+    };
+
+    fetch(url).then(data => data.json()).then(data => {
+
+        jsonData = data;
+        console.log(jsonData);
+        displayEvents(jsonData,x,y);
+        addEventMarkers(jsonData);
+        
     });
-}
+   
+};
 
-function displayEvents(jsonData) {
+function displayEvents(jsonData,x,y) {
     var eventHeader = document.querySelector('#eventHeader')
    
     //This element begins as display: none. Changes it to flex when submit button is pressed
     document.getElementById("eventList").style.display = "flex";
-
-    
-    var city = document.querySelector('#cityInput').value;
    
+    
+    var city = jsonData._embedded.events[0]._embedded.venues[0].city.name
     var genre = document.querySelector('#genreInput').value;
     
-    //Changes the event header to the user's city and genre selection
+    // Changes the event header to the user's city and genre selection
     if (genre == "Musicals") {
-        eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
+      eventHeader.innerHTML = `<button onclick="prevPage(jsonData)">Prev</button>     <u>${city} ${genre}</u>     <button onclick="nextPage(jsonData)">Next</button>`;
+
     } else {
-        eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
+      eventHeader.innerHTML = `<button onclick="prevPage(jsonData)">Prev</button>     <u>${city} ${genre} Events</u>     <button onclick="nextPage(jsonData)">Next</button>`;
+
     };
 
-    for (var x = 0; x < 9; x++) {
-
+    let eventList = document.querySelector("#eventList");
+    eventList.innerHTML = "";
+    console.log(x,y);
+    for (var x; x < y; x++) {
+      
+      var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
+      var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
+      eventList.innerHTML += `<div class="event" id="event${x + 1}"></div>`;
         //Targets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x + 1}`);
 
         //Sets array for the date to rearrange it to be in mm/dd/yyyy format
-        var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
-        var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
+        
+       
 
         // Generates each listed event
         eventDisplay.innerHTML = `<button class="saveButton">Save</button>`;
         eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
         eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
-        eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
-        eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
+        $(`#event${x + 1}`).attr("style", `background-image: url('${jsonData._embedded.events[x].images[2].url}') ` )
+        // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
+        eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
         
     };
+}
 
+function nextPage(jsonData) {
+  x = x + 9;
+  y = y + 9;
+  handleSearch(jsonData, x, y);
+  return x, y;
+}
 
-
+function prevPage(jsonData) {
+  x = x - 9;
+  y = y - 9;
+  handleSearch(jsonData, x, y);
+  return x, y;
 }
 
 // Function for display info on the right side of screen
 function displayData(value) {
-  var x = value;
+
+    var x = value;
     var info = document.getElementById('infoDisplay');
 
-    var venue = jsonData._embedded.events[x]._embedded.venues[0].name
-    var name = jsonData._embedded.events[x].name
-    info.innerHTML = `<p><b>` + name + `</b></p>`
-    info.innerHTML += `<p><u>Venue</u> <br>` + venue + `</p>`
-    if(jsonData._embedded.events[x].priceRanges != undefined){
+    info.innerHTML = `<h4><b>${jsonData._embedded.events[x].name}</b></h4>`;
+  info.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
+  info.innerHTML += `<p id="nextShow"></p>`;
+  info.innerHTML += `<p id="infoBar"></p>`;
+  info.innerHTML += `<p><u>Venue</u>: <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`;
+  if(jsonData._embedded.events[x].priceRanges != undefined){
            maxPrice = jsonData._embedded.events[x].priceRanges[0].max;
            minPrice = jsonData._embedded.events[x].priceRanges[0].min;
            info.innerHTML += `<p><u>Price Range</u><br>$` + Math.round(minPrice) + ` to ` + `$` + Math.round(maxPrice) + `</p>`
     }else{
         info.innerHTML += `<p><u>Price Range</u><br>Ticket price not available</p>`
-    }
+    }  info.innerHTML += `<p id="pleaseNote"></p>`;
+  info.innerHTML += `<p id="onSale"></p>`;
 
   let nextShow = document.getElementById("nextShow");
   let onSale = document.getElementById("onSale");
@@ -97,8 +133,29 @@ function displayData(value) {
       console.log(addInfo);
       let arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
       let date = `${arr[1]}-${arr[2]}-${arr[0]}`;
+
       let time = jsonData._embedded.events[x].dates.start.localTime;
-      nextShow.innerHTML = `<u>Next Show Date</u>:<br>${date}<br></br><u>Next Show Time</u>:<br>${time}`;
+      time = time.split(':');
+        var hours = Number(time[0]);
+        var minutes = Number(time[1]);
+        var seconds = Number(time[2]);
+
+
+var timeValue;
+
+if (hours > 0 && hours <= 12) {
+  timeValue= "" + hours;
+} else if (hours > 12) {
+  timeValue= "" + (hours - 12);
+} else if (hours == 0) {
+  timeValue= "12";
+}
+ 
+timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes; 
+timeValue += (seconds < 10) ? ":0" + seconds : ":" + seconds; 
+timeValue += (hours >= 12) ? " P.M." : " A.M."; 
+
+      nextShow.innerHTML = `<u>Next Show Date</u>:<br>${date}<br></br><u>Next Show Time</u>:<br>${timeValue}`;
 
       infoBar.innerHTML = `<u>Info</u>:` + `<br>${addInfo.info}`;
       if (`${addInfo.info}` === "undefined") {
@@ -121,6 +178,7 @@ function displayData(value) {
 }
 
 // Set global map variables
+
 let userLat;
 let userLon;
 let map;
@@ -128,18 +186,19 @@ let eventLayerGroup;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
-  userLat = position.coords.latitude;
-  userLon = position.coords.longitude;
-  generateMap(userLat, userLon);
-  addUserMarker(userLat, userLon);
-  console.log(`User's position is: Lat: ${userLat}, Lon: ${userLon}`);
+    userLat = position.coords.latitude;
+    userLon = position.coords.longitude;
+    generateMap(userLat, userLon);
+    addUserMarker(userLat, userLon);
+    console.log(`User's position is: Lat: ${userLat}, Lon: ${userLon}`);
 };
 let positionError = (err) => {
-  console.log(err.code);
+    console.log(err.code);
 };
 navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
 // Generate map
+
 let generateMap = (userLat, userLon) => {
     map = L.map('map').setView([userLat, userLon], 11);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

@@ -43,6 +43,8 @@ html {
     width: 70%;
     background-color: #12232E;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+    
+    
   }
   section{
       margin-top:5px;
@@ -98,7 +100,8 @@ html {
  }
 
  .event:hover {
-   transform: scale(1.5)
+   transform: scale(1.5);
+  
  }
 
  /* Styling for the middle area where events are listed */
@@ -107,6 +110,7 @@ html {
      display:none;
      flex-wrap: wrap;
      justify-content: center;  
+     margin-bottom: 30px;
  }
 
  /* Search submit button */
@@ -118,6 +122,7 @@ html {
   background-color: #12232E;
   border-color:white;
   border-style:solid;
+  place-items: center;
  }
  #submit:hover{
   background-color: #4DA8DA;
@@ -279,14 +284,17 @@ html {
    
  }
  .eventTickets a{
-   font-size:12pt;
-   color:white;
-   text-decoration: none;
- }
- .eventTickets a:hover{
-  color:#12232E;
-  text-decoration: underline;
- }
+  font-size:12pt;
+  color:white;
+  text-decoration: none;
+  background-color: #12232E;
+  border-radius: 5px;
+}
+.eventTickets a:hover{
+ color:#4DA8DA;
+ 
+ font-weight: bold;
+}
 
 /* Right side info styling */
  #info{
@@ -308,6 +316,7 @@ html {
   align-items: center;
   width:100%;
  }
+
  #infoBar, #pleaseNote{
   margin: 0% 2%;
  }
