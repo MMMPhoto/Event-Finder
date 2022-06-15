@@ -21,7 +21,7 @@ html {
     background-position-y: center;
     background-size: cover;
     position: relative;
-    width: fit-content;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     /* height:300px; */
@@ -30,6 +30,9 @@ html {
 
   .neon {
     position: relative;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
     overflow: hidden;
     filter: brightness(200%);
 }
@@ -395,7 +398,7 @@ html {
  #info{
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
   background-color: #12232E;
-  width: fit-content;
+  width: 30%;
   max-width: 400px;
   color:white;
   border-radius: 5px;
