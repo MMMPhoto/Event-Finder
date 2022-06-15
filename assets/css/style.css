@@ -326,3 +326,8 @@ html {
     padding: 10px;
     margin-bottom: 5px;
  }
+
+ .red-shift {
+    filter: hue-rotate(150deg);
+ }
+

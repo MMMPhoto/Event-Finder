@@ -132,7 +132,12 @@ let generateMap = (userLat, userLon) => {
 };
 // Generate user location marker
 let addUserMarker = (userLat, userLon) => {
-    L.marker([userLat, userLon]).addTo(map).bindTooltip('You are here');      
+    let userIcon = L.icon ({
+        iconUrl: "./assets/leaflet/images/marker-icon.png",
+        className: 'red-shift'
+    });
+    // userIcon.classname = "red-shift";
+    L.marker([userLat, userLon], {icon: userIcon}).addTo(map).bindTooltip('You are here');      
 };
 // Generate event location marker
 let addEventMarkers = (jsonData) => {
