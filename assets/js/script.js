@@ -15,49 +15,75 @@ function handleSearch() {
   info.innerHTML = `<br><u>Event Info</u>`;
 
   // API fetch
-  let url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
+  console.log(city);
+  let url;
+  // Checks if User location is being used instead of city
+  if (city == 'User Location') {
+      let userLatLon = `${userLat},${userLon}`;  
+      url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
+  } else {
+      url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
 
+  };
   fetch(url)
     .then((data) => data.json())
     .then((data) => {
-      jsonData = data;
-      displayEvents(jsonData);
-      console.log(jsonData);
+        jsonData = data;
+        console.log(jsonData);
+        displayEvents(jsonData);
+        addEventMarkers(jsonData);
     });
 }
 
 function displayEvents(jsonData) {
-  //This element begins as display: none. Changes it to flex when submit button is pressed
-  document.getElementById("eventList").style.display = "flex";
+    var eventHeader = document.querySelector('#eventHeader')
+   
+    //This element begins as display: none. Changes it to flex when submit button is pressed
+    document.getElementById("eventList").style.display = "flex";
 
-  var eventHeader = document.querySelector("#eventHeader");
-  var city = document.querySelector("#cityInput").value;
-  var genre = document.querySelector("#genreInput").value;
+    
+    var city = document.querySelector('#cityInput').value;
+    var genre = document.querySelector('#genreInput').value;
 
-  //Changes the event header to the user's city and genre selection
-  if (genre == "Musicals") {
-    eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
-  } else {
-    eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
-  }
 
-  for (var x = 0; x < 9; x++) {
-    //Targets the text area for the corresponding event
-    var eventDisplay = document.querySelector(`#event${x + 1}`);
+    if (mapNotVisible) {
+        map.style.display = "block";
+        generateMap(userLat, userLon);
+        mapNotVisible = false;
+    };
+    //Changes the event header to the user's city and genre selection
+    if (city == 'User Location') {
+        city = 'Nearby';
+        map.panTo(new L.LatLng(userLat, userLon));
+        addUserMarker(userLat, userLon);
+    };
+    if (genre == "Musicals") {
+        eventHeader.innerHTML = `<u>${city} ${genre}</u>`;
+    } else {
+        eventHeader.innerHTML = `<u>${city} ${genre} Events</u>`;
+    };
 
-    //Sets array for the date to rearrange it to be in mm/dd/yyyy format
-    var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
-    var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
+    for (var x = 0; x <= 8; x++) {
 
-    // Generates each listed event
-    eventDisplay.innerHTML = `<button class="saveButton">Save</button>`;
-    eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
-    eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
-    eventDisplay.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p><br>`;
-    // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
-    eventDisplay.innerHTML += `<span class="setBottom"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
-  }
-}
+        //Targets the text area for the corresponding event 
+        var eventDisplay = document.querySelector(`#event${x + 1}`);
+
+        //Sets array for the date to rearrange it to be in mm/dd/yyyy format
+        
+        var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
+        var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
+
+        // Generates each listed event
+        eventDisplay.innerHTML = `<button class="saveButton">Save</button>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
+        $(`#event${x + 1}`).attr("style", `background-image: url('${jsonData._embedded.events[x].images[2].url}') ` )
+        // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
+        eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
+        
+    };
+
+};
 
 // Function for display info on the right side of screen
 function displayData(value) {
@@ -113,15 +139,14 @@ function displayData(value) {
 // Set global map variables
 let userLat;
 let userLon;
-let map;
+let map = document.getElementById('map');
+let mapNotVisible = true;
 let eventLayerGroup;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
   userLat = position.coords.latitude;
   userLon = position.coords.longitude;
-  generateMap(userLat, userLon);
-  addUserMarker(userLat, userLon);
   console.log(`User's position is: Lat: ${userLat}, Lon: ${userLon}`);
 };
 let positionError = (err) => {
