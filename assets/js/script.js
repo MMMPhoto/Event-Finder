@@ -1,8 +1,12 @@
+// API key and targeting variable
 var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ";
 var eventSubmit = document.querySelector(".event");
+
+// Variables for manipulating what page of events the user is viewing
 let x = 0;
 let y = 9;
 
+// Function to make the initial API call based on the input when the user clicks "Search"
 function handleSearch() {
   var info = document.getElementById("infoDisplay");
   var city = document.querySelector("#cityInput").value;
@@ -12,6 +16,7 @@ function handleSearch() {
   var year = document.querySelector("#yearInput").value;
   var month = document.querySelector("#monthInput").value;
   var radius = document.querySelector("#radiusInput").value;
+
   // Resets the right side info text area when another event is searched
   info.innerHTML = `<br><u>Event Info</u>`;
 
@@ -27,9 +32,8 @@ function handleSearch() {
     });
 }
 
+// Function to display the data from the API call in the center of the page
 function displayEvents(jsonData, x, y) {
-  //This element begins as display: none. Changes it to flex when submit button is pressed
-  // document.getElementById("eventList").style.display = "flex";
   var eventHeader = document.querySelector("#eventHeader");
   var city = document.querySelector("#cityInput").value;
   var genre = document.querySelector("#genreInput").value;
@@ -40,18 +44,21 @@ function displayEvents(jsonData, x, y) {
   var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
   var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
 
+  // Generates the "next" and "previous" buttons, and adds functionality to them
   eventHeader.innerHTML = `<button onclick="prevPage(jsonData)">Prev</button>     <u>${city} ${genre}</u>     <button onclick="nextPage(jsonData)">Next</button>`;
 
+  // Clears the main page between pageovers
   let eventList = document.querySelector("#eventList");
   eventList.innerHTML = "";
-  for (var x; x < y; x++) {
-    //Targets the text area for the corresponding event
 
+  // "For" loop to create 9 results on the main page using the X and Y variables established above
+  for (var x; x < y; x++) {
+    //Creates the text area for the corresponding event
     eventList.innerHTML += `<div class="event" id="event${x + 1}"></div>`;
 
     var eventDisplay = document.querySelector(`#event${x + 1}`);
 
-    // Generates each listed event
+    // Populates each event
     eventDisplay.innerHTML = `<button class="saveButton">Save</button>`;
     eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
     eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
@@ -61,6 +68,7 @@ function displayEvents(jsonData, x, y) {
   }
 }
 
+// Manipulates the X and Y variables upward to show the next 9 events from the API call
 function nextPage(jsonData) {
   x = x + 9;
   y = y + 9;
@@ -68,6 +76,7 @@ function nextPage(jsonData) {
   return x, y;
 }
 
+// Manipulates the X and Y variables downward to show the previous 9 events from the API call
 function prevPage(jsonData) {
   x = x - 9;
   y = y - 9;
@@ -75,11 +84,12 @@ function prevPage(jsonData) {
   return x, y;
 }
 
-// Function for display info on the right side of screen
+// Function to run a second API call to retreive and display specific event info on the right side of screen when the "Info" button is clicked
 function displayData(value) {
   var x = value;
   var info = document.getElementById("infoDisplay");
 
+  // Generates the categories and fills them with info
   info.innerHTML = `<h4><b>${jsonData._embedded.events[x].name}</b></h4>`;
   info.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
   info.innerHTML += `<p id="nextShow"></p>`;
@@ -96,6 +106,7 @@ function displayData(value) {
   let id = jsonData._embedded.events[x].id;
   let url = `https://app.ticketmaster.com/discovery/v2/events/${id}.json?apikey=${apiKey}`;
 
+  // Runs a second API call to get specific info about the event that was clicked
   fetch(url)
     .then((data) => data.json())
     .then((data) => {
@@ -106,6 +117,7 @@ function displayData(value) {
       let time = jsonData._embedded.events[x].dates.start.localTime;
       nextShow.innerHTML = `<u>Next Show Date</u>:<br>${date}<br></br><u>Next Show Time</u>:<br>${time}`;
 
+      // Display nothing if the event is lacking the requested info
       infoBar.innerHTML = `<u>Info</u>:` + `<br>${addInfo.info}`;
       if (`${addInfo.info}` === "undefined") {
         infoBar.innerHTML = "";
@@ -125,7 +137,7 @@ function displayData(value) {
     });
 }
 
-// Set global variables
+// Set global variables for the map
 let userLat;
 let userLon;
 
