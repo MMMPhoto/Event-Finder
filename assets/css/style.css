@@ -112,7 +112,7 @@ html {
     padding: 0;
   }
   
-  article {
+  #article {
     border-radius:5px;
     padding: 20px;
     width: 70%;
