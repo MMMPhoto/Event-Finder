@@ -100,8 +100,7 @@ html {
 
  /* Styling for the middle area where events are listed */
  #eventList{
-     /* display:flex; */
-     display:none;
+     display:flex;
      flex-wrap: wrap;
      justify-content: center;  
  }
