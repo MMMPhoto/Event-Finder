@@ -4,8 +4,9 @@ let x = 0;
 let y = 9;
 
 function handleSearch() {
-
+ 
     var info = document.getElementById('infoDisplay');
+    info.innerHTML="";
     var city = document.querySelector('#cityInput').value;
     var genre = document.querySelector('#genreInput').value;
     // var family = document.querySelector('#familyInput').value;
@@ -23,9 +24,9 @@ function handleSearch() {
     // Checks if User location is being used instead of city
     if (city == 'User Location') {
         let userLatLon = `${userLat},${userLon}`;  
-        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
+        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
-        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
+        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
 
     };
 
@@ -51,13 +52,16 @@ function displayEvents(jsonData,x,y) {
     var genre = document.querySelector('#genreInput').value;
     
     // Changes the event header to the user's city and genre selection
+   
     if (genre == "Musicals") {
-      eventHeader.innerHTML = `<button onclick="prevPage(jsonData)">Prev</button>     <u>${city} ${genre}</u>     <button onclick="nextPage(jsonData)">Next</button>`;
+      eventHeader.innerHTML = `<button class="pageButton" onclick="prevPage(jsonData)">Prev</button>     ${city} ${genre}     <button class="pageButton"  onclick="nextPage(jsonData)">Next</button>`;
 
     } else {
-      eventHeader.innerHTML = `<button onclick="prevPage(jsonData)">Prev</button>     <u>${city} ${genre} Events</u>     <button onclick="nextPage(jsonData)">Next</button>`;
-
+      eventHeader.innerHTML = `<button class="pageButton"  onclick="prevPage(jsonData)">Prev</button>     ${city} ${genre} Events<button  class="pageButton" onclick="nextPage(jsonData)">Next</button>`;
     };
+  
+  
+
 
     let eventList = document.querySelector("#eventList");
     eventList.innerHTML = "";
@@ -76,12 +80,12 @@ function displayEvents(jsonData,x,y) {
 
         // Generates each listed event
         eventDisplay.innerHTML = `<button class="saveButton">Save</button>`;
-        eventDisplay.innerHTML += `<p class="eventDisplay">${jsonData._embedded.events[x].name}</p>`;
-        eventDisplay.innerHTML += `<p class="eventDisplay">${date}</p>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay" p id= "eventName">${jsonData._embedded.events[x].name}</p>`;
+        eventDisplay.innerHTML += `<p class="eventDisplay" p id= "eventDate">${date}</p>`;
         $(`#event${x + 1}`).attr("style", `background-image: url('${jsonData._embedded.events[x].images[2].url}') ` )
         // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
         eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
-        
+        $(`#article`).css('background-image', 'none');
     };
 }
 
@@ -93,10 +97,14 @@ function nextPage(jsonData) {
 }
 
 function prevPage(jsonData) {
+ 
   x = x - 9;
   y = y - 9;
+
+
   handleSearch(jsonData, x, y);
   return x, y;
+  
 }
 
 // Function for display info on the right side of screen
@@ -104,20 +112,22 @@ function displayData(value) {
 
     var x = value;
     var info = document.getElementById('infoDisplay');
+    
 
-    info.innerHTML = `<h4><b>${jsonData._embedded.events[x].name}</b></h4>`;
-  info.innerHTML += `<p class="eventImage"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
-  info.innerHTML += `<p id="nextShow"></p>`;
-  info.innerHTML += `<p id="infoBar"></p>`;
-  info.innerHTML += `<p><u>Venue</u>: <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`;
+    info.innerHTML = `<h4 class="infoStyle"><b>${jsonData._embedded.events[x].name}</b></h4>`;
+  info.innerHTML += `<p class="eventImage infoStyle"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
+  info.innerHTML += `<p id="nextShow" class="infoStyle"></p>`;
+  info.innerHTML += `<p id="infoBar" class="infoStyle"></p>`;
+  info.innerHTML += `<p class="infoStyle"><u>Venue</u>: <br>${jsonData._embedded.events[x]._embedded.venues[0].name}</p>`;
   if(jsonData._embedded.events[x].priceRanges != undefined){
            maxPrice = jsonData._embedded.events[x].priceRanges[0].max;
            minPrice = jsonData._embedded.events[x].priceRanges[0].min;
-           info.innerHTML += `<p><u>Price Range</u><br>$` + Math.round(minPrice) + ` to ` + `$` + Math.round(maxPrice) + `</p>`
+           info.innerHTML += `<p class="infoStyle"><u>Price Range</u><br>$` + Math.round(minPrice) + ` to ` + `$` + Math.round(maxPrice) + `</p>`
     }else{
-        info.innerHTML += `<p><u>Price Range</u><br>Ticket price not available</p>`
-    }  info.innerHTML += `<p id="pleaseNote"></p>`;
-  info.innerHTML += `<p id="onSale"></p>`;
+        info.innerHTML += `<p class="infoStyle"><u>Price Range</u><br>Ticket price not available</p>`
+    }  info.innerHTML += `<p id="pleaseNote" class="infoStyle"></p>`;
+  info.innerHTML += `<p id="onSale" class="infoStyle"></p>`;
+  info.innerHTML += `<button id="ticketButton" onclick="window.open('${jsonData._embedded.events[x].url}')">Click to Purchase Tickets Now!</p></button>`;
 
   let nextShow = document.getElementById("nextShow");
   let onSale = document.getElementById("onSale");
