@@ -24,7 +24,6 @@ function handleSearch() {
         url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
         url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
-
     };
 
     fetch(url).then(data => data.json()).then(data => {
@@ -41,7 +40,6 @@ function displayEvents(jsonData) {
    
     //This element begins as display: none. Changes it to flex when submit button is pressed
     document.getElementById("eventList").style.display = "flex";
-
     
     var city = document.querySelector('#cityInput').value;
     var genre = document.querySelector('#genreInput').value;
@@ -81,9 +79,7 @@ function displayEvents(jsonData) {
         $(`#event${x + 1}`).attr("style", `background-image: url('${jsonData._embedded.events[x].images[2].url}') ` )
         // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
         eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
-        
     };
-
 };
 
 // Function for display info on the right side of screen
@@ -105,14 +101,8 @@ function displayData(value) {
            info.innerHTML += `<p><u>Price Range</u><br>$` + Math.round(minPrice) + ` to ` + `$` + Math.round(maxPrice) + `</p>`
     }else{
         info.innerHTML += `<p><u>Price Range</u><br>Ticket price not available</p>`
-    }
-     // Add Button to get directions
-    // info.appendChild(directionsButton);
-    // directionsButton.innerHTML = `<button class="directionsButton" >Get Directions</button>`;
-    // console.log(`venue lat lon is ${venueLat}, ${venueLon}`);
-    // generateRouting(userLat, userLon);
-
-}
+    };
+};
 
 // Set global map variables
 let userLat;
@@ -158,32 +148,3 @@ let addEventMarkers = (jsonData) => {
     };
     map.fitBounds(eventLayerGroup.getBounds().pad(0.5));
 };
-
-// Create routing on map
-// let generateRouting = (userLat, userLon) => {
-//     // let graphHopperApiKey = '82f0f7e0-f73e-41bb-a6fb-f32fb15245dd'
-//     L.Routing.control({
-//         waypoints: [
-//             L.latLng(userLat, userLon),
-//             L.latLng(33.8261112, -84.2924226)
-//         ],
-//         lineOptions: {
-//             styles: [{color: 'black'}]
-//         },
-//         // router: L.Routing.graphHopper('82f0f7e0-f73e-41bb-a6fb-f32fb15245dd')
-//     }).addTo(map);
-// };
-
-// let generateRouting = () => {
-//     L.leafletControlRoutingtoaddress({
-//         position: 'topright',
-//         router: 'osrm',
-//         token: '',
-//         placeholder: 'Please insert your address here.',
-//         errormessage: 'Address not valid.',
-//         distance: 'Distance:',
-//         duration: 'Driving Time:',
-//         target: `${userLat},${userLon}`,
-//         requesterror: '"Too Many Requests" or "Not Authorized - Invalid Token"'
-//     }).addTo(map);
-// };
