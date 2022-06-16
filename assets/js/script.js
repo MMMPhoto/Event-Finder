@@ -50,9 +50,18 @@ function displayEvents(jsonData,x,y) {
     
     var city = jsonData._embedded.events[0]._embedded.venues[0].city.name
     var genre = document.querySelector('#genreInput').value;
-    
-    // Changes the event header to the user's city and genre selection
-   
+    let cityInput = document.getElementById('cityInput');
+
+    if (mapNotVisible) {
+        map.style.display = "block";
+        generateMap(userLat, userLon);
+        mapNotVisible = false;
+    };
+    //Changes the event header to the user's city and genre selection
+    if (cityInput.value == 'User Location') {
+        map.panTo(new L.LatLng(userLat, userLon));
+        addUserMarker(userLat, userLon);
+    };
     if (genre == "Musicals") {
       eventHeader.innerHTML = `<button class="pageButton" onclick="prevPage(jsonData)">Prev</button>     ${city} ${genre}     <button class="pageButton"  onclick="nextPage(jsonData)">Next</button>`;
 
@@ -87,7 +96,8 @@ function displayEvents(jsonData,x,y) {
         eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
         $(`#article`).css('background-image', 'none');
     };
-}
+    addSaveListeners();
+};
 
 function nextPage(jsonData) {
   x = x + 9;
@@ -114,7 +124,7 @@ function displayData(value) {
     var info = document.getElementById('infoDisplay');
     
 
-    info.innerHTML = `<h4 class="infoStyle"><b>${jsonData._embedded.events[x].name}</b></h4>`;
+  info.innerHTML = `<h4 class="infoStyle"><b>${jsonData._embedded.events[x].name}</b></h4>`;
   info.innerHTML += `<p class="eventImage infoStyle"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
   info.innerHTML += `<p id="nextShow" class="infoStyle"></p>`;
   info.innerHTML += `<p id="infoBar" class="infoStyle"></p>`;
@@ -187,19 +197,36 @@ timeValue += (hours >= 12) ? " P.M." : " A.M.";
 
 }
 
-// Set global map variables
+//function to get all save buttons from search results
+function addSaveListeners() {
+    //variable set to find all the save buttons
+    var allSavebuttons = document.getElementsByClassName("saveButton")
+    //console.log(allSavebuttons)
+    for (i=0; i < allSavebuttons.length; i++) {
+        var title = allSavebuttons[i].nextElementSibling.textContent
+        //console.log(title)
+        allSavebuttons[i].addEventListener("click", addLocalStorage.bind(null,title))
+    }
+    
+}
 
+function addLocalStorage(input) {
+    //console.log(input)
+    localStorage.setItem("selectedTitle", input);
+    displayTitles()
+}
+
+// Set global map variables
 let userLat;
 let userLon;
-let map;
+let map = document.getElementById('map');
+let mapNotVisible = true;
 let eventLayerGroup;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
     userLat = position.coords.latitude;
     userLon = position.coords.longitude;
-    generateMap(userLat, userLon);
-    addUserMarker(userLat, userLon);
     console.log(`User's position is: Lat: ${userLat}, Lon: ${userLon}`);
 };
 let positionError = (err) => {
@@ -218,7 +245,12 @@ let generateMap = (userLat, userLon) => {
 };
 // Generate user location marker
 let addUserMarker = (userLat, userLon) => {
-    L.marker([userLat, userLon]).addTo(map).bindTooltip('You are here');      
+    let userIcon = L.icon ({
+        iconUrl: "./assets/leaflet/images/marker-icon.png",
+        className: 'red-shift'
+    });
+    // userIcon.classname = "red-shift";
+    L.marker([userLat, userLon], {icon: userIcon}).addTo(map).bindTooltip('You are here');      
 };
 // Generate event location marker
 let addEventMarkers = (jsonData) => {
@@ -232,5 +264,17 @@ let addEventMarkers = (jsonData) => {
         marker = L.marker([venueLat, venueLon]).bindTooltip(`${jsonData._embedded.events[i].name}<br>${jsonData._embedded.events[i]._embedded.venues[0].name}`);
         eventLayerGroup.addLayer(marker);
     };
-    map.fitBounds(eventLayerGroup.getBounds());
+    map.fitBounds(eventLayerGroup.getBounds().pad(0.5));
 };
+
+//Fucntion displays titles from local storage to left side of page
+function displayTitles() {
+    var saveTitles = document.getElementById("saveTitle")
+    var selectedTitle = localStorage.getItem("selectedTitle")
+    //console.log(selectedTitle)
+    
+    if (selectedTitle !== null){
+        saveTitles.innerHTML += (`<li>${selectedTitle}</li>`)
+    }
+}
+displayTitles();
