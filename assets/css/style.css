@@ -9,7 +9,7 @@ html {
   /* Style the header */
   header {
     background-color:  #12232E;
-    padding: 30px;
+    padding-top: 30px;
     text-align: left;
     font-size: 35px;
     color: white;
@@ -42,7 +42,12 @@ html {
     padding: 20px;
     width: 70%;
     background-color: #12232E;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+    position: relative;
+    background-image: url("https://www.oxfordeconomics.com/wp-content/uploads/2021/08/Concert.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   section{
       margin-top:5px;
@@ -59,6 +64,86 @@ html {
     text-align: center;
     color: white;
   }
+
+  .neon {
+    margin-top: 150px;
+    position: relative;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    filter: brightness(200%);
+    border-radius: 10px;
+   
+    
+}
+
+.text {
+  background-color:black;
+  border-radius: 10px;
+    color: white;
+    font-size: 180px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    user-select: none;
+    
+    
+}
+
+.text::before {
+    content: attr(data-text);
+    position: absolute;
+    color: white;
+    filter: blur(0.02em);
+    mix-blend-mode: difference;
+    border-radius: 10px;
+    
+}
+
+.gradient {
+    position: absolute;
+    background: linear-gradient(45deg, #12232E , #007CC7, violet, #007CC7, #12232E);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    mix-blend-mode: multiply;
+    border-radius: 10px;
+}
+
+.spotlight {
+  border-radius: 10px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: -100%;
+    left: -100%;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(
+            circle,
+            white,
+            transparent 25%
+        ) center / 25% 25%,
+        radial-gradient(
+            circle,
+            white,
+            black 25%
+        ) center / 12.5% 12.5%;
+    animation: light 5s linear infinite;
+    mix-blend-mode: color-dodge;
+    opacity: 40%;
+    
+}
+
+@keyframes light {
+    to {
+        transform: translate(50%, 50%);
+        border-radius: 10px;
+    }
+}
  
   /* Styling for left side search area */
   .search{
@@ -69,6 +154,10 @@ html {
     padding:10px;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
     width: 100%;
+    background-image: url("https://res.cloudinary.com/dragonspell/images/w_540,h_675,c_fill,dpr_auto,fl_progressive:steep,f_auto/w_540,h_675/v1571420580/www.travelportland.com/EVT_Music_SummerConcerts_courtesy_EcoTrust/EVT_Music_SummerConcerts_courtesy_EcoTrust.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
  
 
@@ -98,7 +187,8 @@ html {
  }
 
  .event:hover {
-   transform: scale(1.5)
+   transform: scale(1.5);
+  
  }
 
  /* Styling for the middle area where events are listed */
@@ -107,6 +197,7 @@ html {
      display:none;
      flex-wrap: wrap;
      justify-content: center;  
+     margin-bottom: 30px;
  }
 
  /* Search submit button */
@@ -165,9 +256,20 @@ html {
  
 /* Header for middle area of page where events are shown */
  #eventHeader{
-     color:white;
-     text-align: center;
-     font-size: 36pt;
+  color:white;
+  border-color: white;
+  text-align: center;
+  font-size: 48pt;
+  font-style: bolder;
+  border-style: solid;
+  display: flex;
+  border-radius: 15px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:#12232E;
+  -webkit-text-stroke-width: 3px;
+ -webkit-text-stroke-color: black;
  }
 
  #searchHeader{
@@ -265,6 +367,7 @@ html {
    font-size: 14pt;
    text-align: center;
  }
+
  p.eventDisplay{
    margin-top: auto;
    margin-bottom: 0px;
@@ -276,39 +379,65 @@ html {
    /* background-color: #12232E; */
    /* opacity: 80% */
    background-color:hsla(204 , 44% , 13%, 0.64);
+ }
 
-   
- }
+ #eventName{
+  font-style: italic;
+}
+
+#eventDate{
+  font-style: bold;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding:5px;
+}
+
  .eventTickets a{
-   font-size:12pt;
-   color:white;
-   text-decoration: none;
- }
- .eventTickets a:hover{
-  color:#12232E;
-  text-decoration: underline;
- }
+  font-size:12pt;
+  color:white;
+  text-decoration: none;
+  background-color: #12232E;
+  border-radius: 5px;
+}
+.eventTickets a:hover{
+ color:#4DA8DA;
+ font-weight: bold;
+}
 
 /* Right side info styling */
- #info{
+#info{
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
   background-color: #12232E;
-  width:20%;
+  width: 30%;
+  max-width: 400px;
   color:white;
   border-radius: 5px;
   margin-left: 5px;
-  font-size: 36pt;
+  font-size: 20pt;
   text-align: center;
   display: flex;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  
  }
+
  #infoDisplay{
-  background-color: #007CC7;
   margin:15px;
-  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
   border-radius: 5px;
+  color:white;
+  font-style: bolder;
   align-items: center;
   width:100%;
+  background-image: url(https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color:#12232E; */
  }
+
 
  /* Styling for setting the Buy Tickets and Info button to bottom of the div */
  .setBottom{
@@ -331,3 +460,40 @@ html {
     filter: hue-rotate(150deg);
  }
 
+ .pageButton{
+  font-size: 20pt;
+  margin: 10px;
+  color: white;;
+  border-radius: 5px;
+ background-color: #4DA8DA;
+ border-color:white;
+ border-style:solid;
+ }
+
+ .pageButton:hover{
+  background-color: white;
+  border-color: black;
+ }
+
+ .infoStyle{
+  border-radius: 5px;
+  background-color: #4DA8DA;
+   padding:20px;
+   /* margin: 5px; */
+   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+   background-color:hsla(204 , 44% , 13%, 0.64);
+   /* width: fit-content;
+   height: fit-content; */
+ }
+
+ #ticketButton{
+    font-size: 20pt;
+    color:white;
+   background-color: #12232E;
+   text-align: center;
+  
+  }
+  #ticketButton:hover{
+   background-color: #4DA8DA;
+ }
+ 
