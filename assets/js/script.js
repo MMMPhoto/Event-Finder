@@ -24,16 +24,10 @@ function handleSearch() {
     // Checks if User location is being used instead of city
     if (city == 'User Location') {
         let userLatLon = `${userLat},${userLon}`;  
-<<<<<<< HEAD
-        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
-    } else {
-        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
-=======
         url = `https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
         url = `https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
 
->>>>>>> 0d3bc63f52e83a4be4e722ed77fba8b1212b888a
     };
 
     fetch(url).then(data => data.json()).then(data => {
@@ -65,11 +59,6 @@ function displayEvents(jsonData,x,y) {
     } else {
       eventHeader.innerHTML = `<button class="pageButton"  onclick="prevPage(jsonData)">Prev</button>     ${city} ${genre} Events<button  class="pageButton" onclick="nextPage(jsonData)">Next</button>`;
     };
-<<<<<<< HEAD
-
-    for (var x = 0; x < jsonData._embedded.events.length; x++) {
-
-=======
   
   
 
@@ -82,7 +71,6 @@ function displayEvents(jsonData,x,y) {
       var arr = jsonData._embedded.events[x].dates.start.localDate.split("-");
       var date = `${arr[1]}-${arr[2]}-${arr[0]}`;
       eventList.innerHTML += `<div class="event" id="event${x + 1}"></div>`;
->>>>>>> 0d3bc63f52e83a4be4e722ed77fba8b1212b888a
         //Targets the text area for the corresponding event 
         var eventDisplay = document.querySelector(`#event${x + 1}`);
 
