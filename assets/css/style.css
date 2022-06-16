@@ -1,202 +1,15 @@
 html {
-<<<<<<< HEAD
   background-color: lightgray;
 }
-=======
-   background-color: lightgray;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  /* Style the header */
-  header {
-    background-color:  #12232E;
-    padding-top: 30px;
-    text-align: left;
-    font-size: 35px;
-    color: white;
-    border-radius: 5px;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);  
-    background-repeat: no-repeat ;
-    background-position-x:bottom;
-    background-position-y: center;
-    background-size: cover;
-    /* height:300px; */
-  }
-  
-  
-  nav {
-    border-radius:5px;
-    width: 30%;
-    background-color: #12232E;
-    padding: 20px;
-    margin-right: 5px;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-    display: flex;
-  }
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  article {
-    border-radius:5px;
-    padding: 20px;
-    width: 70%;
-    background-color: #12232E;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
-    position: relative;
-    background-image: url("https://www.oxfordeconomics.com/wp-content/uploads/2021/08/Concert.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  section{
-      margin-top:5px;
-      margin-bottom:5px;
-      display: flex;
-  }
- 
-  footer {
-    border-radius: 5px;
-    background-color: #12232E;
-    padding: 10px;
-    /* width: 100%; */
-    height:25px;
-    text-align: center;
-    color: white;
-  }
-
-  .neon {
-    margin-top: 150px;
-    position: relative;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden;
-    filter: brightness(200%);
-    border-radius: 10px;
-   
-    
-}
-
-.text {
-  background-color:black;
-  border-radius: 10px;
-    color: white;
-    font-size: 180px;
-    font-weight: bold;
-    font-family: sans-serif;
-    text-transform: uppercase;
-    user-select: none;
-    
-    
-}
-
-.text::before {
-    content: attr(data-text);
-    position: absolute;
-    color: white;
-    filter: blur(0.02em);
-    mix-blend-mode: difference;
-    border-radius: 10px;
-    
-}
-
-.gradient {
-    position: absolute;
-    background: linear-gradient(45deg, #12232E , #007CC7, violet, #007CC7, #12232E);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    mix-blend-mode: multiply;
-    border-radius: 10px;
-}
-
-.spotlight {
-  border-radius: 10px;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    top: -100%;
-    left: -100%;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(
-            circle,
-            white,
-            transparent 25%
-        ) center / 25% 25%,
-        radial-gradient(
-            circle,
-            white,
-            black 25%
-        ) center / 12.5% 12.5%;
-    animation: light 5s linear infinite;
-    mix-blend-mode: color-dodge;
-    opacity: 40%;
-    
-}
-
-@keyframes light {
-    to {
-        transform: translate(50%, 50%);
-        border-radius: 10px;
-    }
-}
- 
-  /* Styling for left side search area */
-  .search{
-    background-color: #007CC7 ;
-    color:white;
-    font-size: 30px;
-    border-radius:5px;
-    padding:10px;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-    width: 100%;
-    background-image: url("https://res.cloudinary.com/dragonspell/images/w_540,h_675,c_fill,dpr_auto,fl_progressive:steep,f_auto/w_540,h_675/v1571420580/www.travelportland.com/EVT_Music_SummerConcerts_courtesy_EcoTrust/EVT_Music_SummerConcerts_courtesy_EcoTrust.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
- 
->>>>>>> 14b1d438f6e99bf5fbf13af81892cb7652d0669a
 
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-<<<<<<< HEAD
 /* Style the header */
 header {
-=======
- .event:hover {
-   transform: scale(1.5);
-  
- }
-
- /* Styling for the middle area where events are listed */
- #eventList{
-     /* display:flex; */
-     display:none;
-     flex-wrap: wrap;
-     justify-content: center;  
-     margin-bottom: 30px;
- }
-
- /* Search submit button */
- #submit{
-   font-size: 20pt;
-   margin: 10px;
-   color:white;
-   border-radius: 5px;
->>>>>>> 14b1d438f6e99bf5fbf13af81892cb7652d0669a
   background-color: #12232E;
-  padding: 30px;
+  padding-top: 30px;
   text-align: left;
   font-size: 35px;
   color: white;
@@ -231,6 +44,11 @@ article {
   width: 70%;
   background-color: #12232E;
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+  position: relative;
+  background-image: url("https://www.oxfordeconomics.com/wp-content/uploads/2021/08/Concert.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 section {
@@ -249,6 +67,82 @@ footer {
   color: white;
 }
 
+.neon {
+  margin-top: 150px;
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  filter: brightness(200%);
+  border-radius: 10px;
+
+
+}
+
+.text {
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  font-size: 180px;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  user-select: none;
+
+
+}
+
+.text::before {
+  content: attr(data-text);
+  position: absolute;
+  color: white;
+  filter: blur(0.02em);
+  mix-blend-mode: difference;
+  border-radius: 10px;
+
+}
+
+.gradient {
+  position: absolute;
+  background: linear-gradient(45deg, #12232E, #007CC7, violet, #007CC7, #12232E);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  mix-blend-mode: multiply;
+  border-radius: 10px;
+}
+
+.spotlight {
+  border-radius: 10px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: -100%;
+  left: -100%;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle,
+      white,
+      transparent 25%) center / 25% 25%,
+    radial-gradient(circle,
+      white,
+      black 25%) center / 12.5% 12.5%;
+  animation: light 5s linear infinite;
+  mix-blend-mode: color-dodge;
+  opacity: 40%;
+
+}
+
+@keyframes light {
+  to {
+    transform: translate(50%, 50%);
+    border-radius: 10px;
+  }
+}
+
 /* Styling for left side search area */
 .search {
   background-color: #007CC7;
@@ -258,6 +152,10 @@ footer {
   padding: 10px;
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
   width: 100%;
+  background-image: url("https://res.cloudinary.com/dragonspell/images/w_540,h_675,c_fill,dpr_auto,fl_progressive:steep,f_auto/w_540,h_675/v1571420580/www.travelportland.com/EVT_Music_SummerConcerts_courtesy_EcoTrust/EVT_Music_SummerConcerts_courtesy_EcoTrust.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 
@@ -288,7 +186,8 @@ footer {
 }
 
 .event:hover {
-  transform: scale(1.5)
+  transform: scale(1.5);
+
 }
 
 /* Styling for the middle area where events are listed */
@@ -297,33 +196,23 @@ footer {
   display: none;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 30px;
 }
+
 
 /* Search submit button */
-#submit {
+#submit{
   font-size: 20pt;
   margin: 10px;
-  color: white;
+  color:white;
   border-radius: 5px;
-  background-color: #12232E;
-  border-color: white;
-  border-style: solid;
-  place-items: center;
+ background-color: #12232E;
+ border-color:white;
+ border-style:solid;
+ place-items: center;
 }
-
-#submit:hover {
-  background-color: #4DA8DA;
-}
-
-#saveTitle {
-  color: white;
-  text-shadow: 5px 5px 5px 10px red;
-  font-size: 20px;
-  padding: 10px 10px;
-  border: solid white;
-  border-radius: 5px;
-  background-color: #4DA8DA;
-  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+#submit:hover{
+ background-color: #4DA8DA;
 }
 
 /* Event info button styling */
@@ -338,10 +227,8 @@ footer {
   border-width: 1px;
   width: 100%;
   border-right: none;
-  ;
   border-left: none;
 }
-
 .infoButton:hover {
   background-color: #4DA8DA;
 }
@@ -358,27 +245,18 @@ footer {
   border-width: 1px;
   width: 100%;
   border-top: none;
-  border-right: none;
-  ;
+  border-right: none;;
   border-left: none;
   top: 0;
 }
-
 .saveButton:hover {
   background-color: #4DA8DA;
 }
 
 
 /* Header for middle area of page where events are shown */
-<<<<<<< HEAD
 #eventHeader {
   color: white;
-  text-align: center;
-  font-size: 36pt;
-}
-=======
- #eventHeader{
-  color:white;
   border-color: white;
   text-align: center;
   font-size: 48pt;
@@ -389,11 +267,10 @@ footer {
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  background-color:#12232E;
+  background-color: #12232E;
   -webkit-text-stroke-width: 3px;
- -webkit-text-stroke-color: black;
- }
->>>>>>> 14b1d438f6e99bf5fbf13af81892cb7652d0669a
+  -webkit-text-stroke-color: black;
+}
 
 #searchHeader {
   border-color: white;
@@ -412,37 +289,31 @@ footer {
   font-size: 16pt;
   border-radius: 5px;
 }
-
 #genreInput {
   /* width:auto; */
   font-size: 16pt;
   border-radius: 5px;
 }
-
 #familyInput {
   /* width: 104px; */
   font-size: 16pt;
   border-radius: 5px;
 }
-
 #radiusInput {
   /* width: 218px; */
   font-size: 16pt;
   border-radius: 5px;
 }
-
 #monthInput {
   border-radius: 5px;
   width: 38px;
   font-size: 16pt;
 }
-
 #dayInput {
   border-radius: 5px;
   width: 38px;
   font-size: 16pt;
 }
-
 #yearInput {
   border-radius: 5px;
   width: 50px;
@@ -458,8 +329,6 @@ footer {
   border-style: solid;
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
 }
-
-<<<<<<< HEAD
 #searchGenre {
   border-radius: 5px;
   background-color: #4DA8DA;
@@ -468,7 +337,6 @@ footer {
   border-style: solid;
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
 }
-
 #searchFamily {
   border-radius: 5px;
   background-color: #4DA8DA;
@@ -477,7 +345,6 @@ footer {
   border-style: solid;
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
 }
-
 #searchRadius {
   border-radius: 5px;
   background-color: #4DA8DA;
@@ -486,7 +353,6 @@ footer {
   border-style: solid;
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
 }
-
 #searchDate {
   border-radius: 5px;
   background-color: #4DA8DA;
@@ -513,48 +379,9 @@ p.eventDisplay {
   /* background-color: #12232E; */
   /* opacity: 80% */
   background-color: hsla(204, 44%, 13%, 0.64);
-
-
 }
 
-.eventTickets a {
-  font-size: 12pt;
-  color: white;
-  text-decoration: none;
-}
-
-.eventTickets a:hover {
-  color: #12232E;
-  text-decoration: underline;
-}
-
-/* Right side info styling */
-#info {
-  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
-  background-color: #12232E;
-  width: 20%;
-  color: white;
-=======
- /* Event styles */
- .eventDisplay{
-   font-size: 14pt;
-   text-align: center;
- }
-
- p.eventDisplay{
-   margin-top: auto;
-   margin-bottom: 0px;
-   border-style: solid;
-   border-width: 1px;
-   border-radius: 20px;
-   border-color: white;
-   font-style: bold;
-   /* background-color: #12232E; */
-   /* opacity: 80% */
-   background-color:hsla(204 , 44% , 13%, 0.64);
- }
-
- #eventName{
+#eventName{
   font-style: italic;
 }
 
@@ -585,20 +412,11 @@ p.eventDisplay {
   width: 30%;
   max-width: 400px;
   color:white;
->>>>>>> 14b1d438f6e99bf5fbf13af81892cb7652d0669a
   border-radius: 5px;
   margin-left: 5px;
   font-size: 20pt;
   text-align: center;
   display: flex;
-<<<<<<< HEAD
-}
-
-#infoDisplay {
-  background-color: #007CC7;
-  margin: 15px;
-  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
-=======
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -607,32 +425,10 @@ p.eventDisplay {
 
  #infoDisplay{
   margin:15px;
->>>>>>> 14b1d438f6e99bf5fbf13af81892cb7652d0669a
   border-radius: 5px;
   color:white;
   font-style: bolder;
   align-items: center;
-<<<<<<< HEAD
-  width: 100%;
-}
-
-/* Styling for setting the Buy Tickets and Info button to bottom of the div */
-.setBottom {
-  margin-top: auto;
-
-}
-
-/* Map div styling */
-#map {
-  height: 500px;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: 10px;
-  border-color: #12232E;
-  padding: 10px;
-  margin-bottom: 5px;
-}
-=======
   width:100%;
   background-image: url(https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80);
   background-repeat: no-repeat;
@@ -650,6 +446,7 @@ p.eventDisplay {
  }
  /* Map div styling */
  #map {
+    display: none;
     height: 500px;
     border-radius: 5px;
     border-style: solid;
@@ -657,6 +454,10 @@ p.eventDisplay {
     border-color: #12232E;
     padding: 10px;
     margin-bottom: 5px;
+ }
+
+ .red-shift {
+    filter: hue-rotate(150deg);
  }
 
  .pageButton{
@@ -696,4 +497,13 @@ p.eventDisplay {
    background-color: #4DA8DA;
  }
  
->>>>>>> 14b1d438f6e99bf5fbf13af81892cb7652d0669a
+ #saveTitle {
+  color: white;
+  text-shadow: 5px 5px 5px 10px red;
+  font-size: 20px;
+  padding: 10px 10px;
+  border: solid white;
+  border-radius: 5px;
+  background-color: #4DA8DA;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}

@@ -24,15 +24,9 @@ function handleSearch() {
     // Checks if User location is being used instead of city
     if (city == 'User Location') {
         let userLatLon = `${userLat},${userLon}`;  
-<<<<<<< HEAD
-        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
-    } else {
-        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
-=======
         url = `https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
         url = `https://app.ticketmaster.com/discovery/v2/events.json?size=${y}&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
->>>>>>> 14b1d438f6e99bf5fbf13af81892cb7652d0669a
 
     };
 
@@ -56,9 +50,18 @@ function displayEvents(jsonData,x,y) {
     
     var city = jsonData._embedded.events[0]._embedded.venues[0].city.name
     var genre = document.querySelector('#genreInput').value;
-    
-    // Changes the event header to the user's city and genre selection
-   
+    let cityInput = document.getElementById('cityInput');
+
+    if (mapNotVisible) {
+        map.style.display = "block";
+        generateMap(userLat, userLon);
+        mapNotVisible = false;
+    };
+    //Changes the event header to the user's city and genre selection
+    if (cityInput.value == 'User Location') {
+        map.panTo(new L.LatLng(userLat, userLon));
+        addUserMarker(userLat, userLon);
+    };
     if (genre == "Musicals") {
       eventHeader.innerHTML = `<button class="pageButton" onclick="prevPage(jsonData)">Prev</button>     ${city} ${genre}     <button class="pageButton"  onclick="nextPage(jsonData)">Next</button>`;
 
@@ -93,11 +96,8 @@ function displayEvents(jsonData,x,y) {
         eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
         $(`#article`).css('background-image', 'none');
     };
-<<<<<<< HEAD
     addSaveListeners();
-     
-=======
-}
+};
 
 function nextPage(jsonData) {
   x = x + 9;
@@ -115,7 +115,6 @@ function prevPage(jsonData) {
   handleSearch(jsonData, x, y);
   return x, y;
   
->>>>>>> 14b1d438f6e99bf5fbf13af81892cb7652d0669a
 }
 
 // Function for display info on the right side of screen
@@ -125,7 +124,7 @@ function displayData(value) {
     var info = document.getElementById('infoDisplay');
     
 
-    info.innerHTML = `<h4 class="infoStyle"><b>${jsonData._embedded.events[x].name}</b></h4>`;
+  info.innerHTML = `<h4 class="infoStyle"><b>${jsonData._embedded.events[x].name}</b></h4>`;
   info.innerHTML += `<p class="eventImage infoStyle"><img height="auto" width="200" src="${jsonData._embedded.events[x].images[0].url}"></p>`;
   info.innerHTML += `<p id="nextShow" class="infoStyle"></p>`;
   info.innerHTML += `<p id="infoBar" class="infoStyle"></p>`;
@@ -199,38 +198,35 @@ timeValue += (hours >= 12) ? " P.M." : " A.M.";
 }
 
 //function to get all save buttons from search results
-    function addSaveListeners() {
-        //variable set to find all the save buttons
-        var allSavebuttons = document.getElementsByClassName("saveButton")
-        //console.log(allSavebuttons)
-        for (i=0; i < allSavebuttons.length; i++) {
-            var title = allSavebuttons[i].nextElementSibling.textContent
-            //console.log(title)
-            allSavebuttons[i].addEventListener("click", addLocalStorage.bind(null,title))
-        }
-        
+function addSaveListeners() {
+    //variable set to find all the save buttons
+    var allSavebuttons = document.getElementsByClassName("saveButton")
+    //console.log(allSavebuttons)
+    for (i=0; i < allSavebuttons.length; i++) {
+        var title = allSavebuttons[i].nextElementSibling.textContent
+        //console.log(title)
+        allSavebuttons[i].addEventListener("click", addLocalStorage.bind(null,title))
     }
+    
+}
 
-    function addLocalStorage(input) {
-        //console.log(input)
-        localStorage.setItem("selectedTitle", input);
-        displayTitles()
-    }
-    
-    
+function addLocalStorage(input) {
+    //console.log(input)
+    localStorage.setItem("selectedTitle", input);
+    displayTitles()
+}
+
 // Set global map variables
-
 let userLat;
 let userLon;
-let map;
+let map = document.getElementById('map');
+let mapNotVisible = true;
 let eventLayerGroup;
 
 // Get user's location by lat long
 let positionSuccess = (position) => {
     userLat = position.coords.latitude;
     userLon = position.coords.longitude;
-    generateMap(userLat, userLon);
-    addUserMarker(userLat, userLon);
     console.log(`User's position is: Lat: ${userLat}, Lon: ${userLon}`);
 };
 let positionError = (err) => {
@@ -249,7 +245,12 @@ let generateMap = (userLat, userLon) => {
 };
 // Generate user location marker
 let addUserMarker = (userLat, userLon) => {
-    L.marker([userLat, userLon]).addTo(map).bindTooltip('You are here');      
+    let userIcon = L.icon ({
+        iconUrl: "./assets/leaflet/images/marker-icon.png",
+        className: 'red-shift'
+    });
+    // userIcon.classname = "red-shift";
+    L.marker([userLat, userLon], {icon: userIcon}).addTo(map).bindTooltip('You are here');      
 };
 // Generate event location marker
 let addEventMarkers = (jsonData) => {
@@ -263,9 +264,8 @@ let addEventMarkers = (jsonData) => {
         marker = L.marker([venueLat, venueLon]).bindTooltip(`${jsonData._embedded.events[i].name}<br>${jsonData._embedded.events[i]._embedded.venues[0].name}`);
         eventLayerGroup.addLayer(marker);
     };
-    map.fitBounds(eventLayerGroup.getBounds());
+    map.fitBounds(eventLayerGroup.getBounds().pad(0.5));
 };
-<<<<<<< HEAD
 
 //Fucntion displays titles from local storage to left side of page
 function displayTitles() {
@@ -278,5 +278,3 @@ function displayTitles() {
     }
 }
 displayTitles();
-=======
->>>>>>> 14b1d438f6e99bf5fbf13af81892cb7652d0669a
