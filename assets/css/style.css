@@ -74,6 +74,7 @@ html {
     overflow: hidden;
     filter: brightness(200%);
     border-radius: 10px;
+    opacity: 66%;
    
     
 }
@@ -134,7 +135,7 @@ html {
         ) center / 12.5% 12.5%;
     animation: light 5s linear infinite;
     mix-blend-mode: color-dodge;
-    opacity: 40%;
+    
     
 }
 
@@ -149,7 +150,7 @@ html {
   .search{
     background-color: #007CC7 ;
     color:white;
-    font-size: 30p
+    font-size: 30px;
     border-radius:5px;
     padding:10px;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
@@ -408,7 +409,6 @@ html {
 /* Right side info styling */
 #info{
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-  background-color: #12232E;
   width: 30%;
   max-width: 400px;
   color:white;
@@ -420,6 +420,8 @@ html {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #12232E;
+  
   
  }
 
@@ -434,6 +436,7 @@ html {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  box-shadow: inset 0 0 0 100vmax rgba(0, 0, 0, .5);
   /* -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color:#12232E; */
  }
@@ -476,12 +479,12 @@ html {
  }
 
  .infoStyle{
-  border-radius: 5px;
-  background-color: #4DA8DA;
-   padding:20px;
+  /* border-radius: 5px; */
+  /* background-color: #4DA8DA; */
+   /* padding:20px; */
    /* margin: 5px; */
-   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-   background-color:hsla(204 , 44% , 13%, 0.64);
+   /* box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);  */
+   /* background-color:hsla(204 , 44% , 13%, 0.64); */
    /* width: fit-content;
    height: fit-content; */
  }
