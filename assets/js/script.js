@@ -21,9 +21,9 @@ function handleSearch() {
     // Checks if User location is being used instead of city
     if (city == 'User Location') {
         let userLatLon = `${userLat},${userLon}`;  
-        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
+        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&latlong=${userLatLon}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&apikey=${apiKey}`;
     } else {
-        url = `https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
+        url = `https://app.ticketmaster.com/discovery/v2/events.json?size=9&sort=date,asc&city=${city}&radius=${radius}&startDateTime=${year}-${month}-${day}T14:00:00Z&classificationName=${genre}&l&apikey=${apiKey}`;
 
     };
 
@@ -106,12 +106,15 @@ function displayData(value) {
             //console.log(title)
             allSavebuttons[i].addEventListener("click", addLocalStorage.bind(null,title))
         }
-}
+        
+    }
+
     function addLocalStorage(input) {
         //console.log(input)
         localStorage.setItem("selectedTitle", input);
         displayTitles()
     }
+    
     
 // Set global map variables
 let userLat;
@@ -163,10 +166,10 @@ let addEventMarkers = (jsonData) => {
 function displayTitles() {
     var saveTitles = document.getElementById("saveTitle")
     var selectedTitle = localStorage.getItem("selectedTitle")
+    //console.log(selectedTitle)
     
     if (selectedTitle !== null){
-        saveTitles.innerHTML += `<li>${selectedTitle}</li>`
-
+        saveTitles.innerHTML += (`<li>${selectedTitle}</li>`)
     }
 }
 displayTitles();
