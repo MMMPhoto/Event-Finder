@@ -96,7 +96,8 @@ function displayEvents(jsonData,x,y) {
         eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
         $(`#article`).css('background-image', 'none');
     };
-}
+    addSaveListeners();
+};
 
 function nextPage(jsonData) {
   x = x + 9;
@@ -196,8 +197,26 @@ timeValue += (hours >= 12) ? " P.M." : " A.M.";
 
 }
 
-// Set global map variables
+//function to get all save buttons from search results
+function addSaveListeners() {
+    //variable set to find all the save buttons
+    var allSavebuttons = document.getElementsByClassName("saveButton")
+    //console.log(allSavebuttons)
+    for (i=0; i < allSavebuttons.length; i++) {
+        var title = allSavebuttons[i].nextElementSibling.textContent
+        //console.log(title)
+        allSavebuttons[i].addEventListener("click", addLocalStorage.bind(null,title))
+    }
+    
+}
 
+function addLocalStorage(input) {
+    //console.log(input)
+    localStorage.setItem("selectedTitle", input);
+    displayTitles()
+}
+
+// Set global map variables
 let userLat;
 let userLon;
 let map = document.getElementById('map');
@@ -247,3 +266,15 @@ let addEventMarkers = (jsonData) => {
     };
     map.fitBounds(eventLayerGroup.getBounds().pad(0.5));
 };
+
+//Fucntion displays titles from local storage to left side of page
+function displayTitles() {
+    var saveTitles = document.getElementById("saveTitle")
+    var selectedTitle = localStorage.getItem("selectedTitle")
+    //console.log(selectedTitle)
+    
+    if (selectedTitle !== null){
+        saveTitles.innerHTML += (`<li>${selectedTitle}</li>`)
+    }
+}
+displayTitles();

@@ -497,3 +497,13 @@ html {
    background-color: #4DA8DA;
  }
  
+ #saveTitle {
+  color: white;
+  text-shadow: 5px 5px 5px 10px red;
+  font-size: 20px;
+  padding: 10px 10px;
+  border: solid white;
+  border-radius: 5px;
+  background-color: #4DA8DA;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
