@@ -66,9 +66,9 @@ html {
   }
 
   .neon {
-    margin-top: 150px;
+    margin-top: 70px;
     position: relative;
-    width: fit-content;
+    width: 74vw;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
@@ -82,7 +82,7 @@ html {
   background-color:black;
   border-radius: 10px;
     color: white;
-    font-size: 180px;
+    font-size: 10.09vw;
     font-weight: bold;
     font-family: sans-serif;
     text-transform: uppercase;
@@ -149,7 +149,7 @@ html {
   .search{
     background-color: #007CC7 ;
     color:white;
-    font-size: 30px;
+    font-size: 30p
     border-radius:5px;
     padding:10px;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
@@ -506,4 +506,27 @@ html {
   border-radius: 5px;
   background-color: #4DA8DA;
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
+
+@media screen and (max-width: 1000px) {
+  header {
+    background-size: contain;
+  }
+  section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  nav {
+    width: 100%;
+  }
+  article {
+    width: 100%;
+  }
+  #eventHeader {
+    width: 60vw;
+  }
+
+  #info {
+    width: 100%;
+  }
 }
