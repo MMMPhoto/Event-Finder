@@ -262,15 +262,15 @@ html {
   text-align: center;
   font-size: 48pt;
   font-style: bolder;
-  border-style: solid;
+  /* border-style: solid; */
   display: flex;
   border-radius: 15px;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
   background-color:#12232E;
-  -webkit-text-stroke-width: 3px;
- -webkit-text-stroke-color: black;
+  /* -webkit-text-stroke-width: 3px;
+ -webkit-text-stroke-color: black; */
  }
 
  #searchHeader{
@@ -474,8 +474,8 @@ html {
  }
 
  .pageButton:hover{
-  background-color: white;
-  border-color: black;
+  background-color:#12232E;
+  border-color:#4DA8DA;
  }
 
  .infoStyle{
