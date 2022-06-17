@@ -242,6 +242,7 @@ let generateMap = (userLat, userLon) => {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
     }).addTo(map);
+     map.scrollWheelZoom.disable();
 };
 // Generate user location marker
 let addUserMarker = (userLat, userLon) => {
