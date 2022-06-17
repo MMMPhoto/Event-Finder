@@ -506,13 +506,22 @@ html {
  
  #saveTitle {
   color: white;
-  text-shadow: 5px 5px 5px 10px red;
-  font-size: 20px;
-  padding: 10px 10px;
   border: solid white;
   border-radius: 5px;
   background-color: #4DA8DA;
-  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
+}
+#sidebuttons > button{
+  background-color:hsla(204 , 44% , 13%, 0.64);
+  font-size: 15px;
+  padding: 5px 10px;
+  border: solid white;
+  border-radius: 5px;
+  color:white;
+}
+#sidebuttons:hover button{
+  color: #4DA8DA;
+  font-size: larger;
 }
 
 @media screen and (max-width: 1000px) {
