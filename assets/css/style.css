@@ -493,17 +493,21 @@ html {
    height: fit-content; */
  /* } */
 
- #ticketButton{
+ .ticketButton{
     font-size: 16pt;
     color:white;
    background-color: #12232E;
    text-align: center;
    border-color: white;
    border-style: solid;
+   border-radius: 5px;
+   width: 100%;
+   
+
    
   
   }
-  #ticketButton:hover{
+  .ticketButton:hover{
    background-color: #4DA8DA;
  }
  
@@ -516,8 +520,7 @@ html {
 } */
 #sidebuttons > button{
   background-color:#12232E;
-  font-size: 15px;
-  padding: 5px 10px;
+  font-size: 20px;
   border: solid white;
   border-radius: 5px;
   color:white;
@@ -525,7 +528,7 @@ html {
 }
 #sidebuttons:hover button{
   background-color: #4DA8DA;
-  font-size: larger;
+
 }
 
 @media screen and (max-width: 1000px) {
