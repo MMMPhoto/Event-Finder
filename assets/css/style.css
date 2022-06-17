@@ -482,7 +482,7 @@ html {
   border-color:#4DA8DA;
  }
 
- .infoStyle{
+ /* .infoStyle{ */
   /* border-radius: 5px; */
   /* background-color: #4DA8DA; */
    /* padding:20px; */
@@ -491,7 +491,7 @@ html {
    /* background-color:hsla(204 , 44% , 13%, 0.64); */
    /* width: fit-content;
    height: fit-content; */
- }
+ /* } */
 
  #ticketButton{
     font-size: 20pt;
@@ -525,15 +525,26 @@ html {
   }
   nav {
     width: 100%;
+    padding: 0%;
   }
   article {
     width: 100%;
+    padding: 0%;
   }
   #eventHeader {
     width: 60vw;
+    font-size: 8vw;
   }
-
+  .pageButton {
+    font-size: 4vw;
+  }
   #info {
     width: 100%;
+  }
+  #info-display {
+    width: 100%;
+  }
+  #map {
+    height: 80vw;
   }
 }
