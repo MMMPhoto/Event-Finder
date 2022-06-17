@@ -512,3 +512,7 @@ html {
   border-radius: 5px;
   color:white;
 }
+#sidebuttons:hover button{
+  color: red;
+  font-size: larger;
+}
