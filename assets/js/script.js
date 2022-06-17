@@ -137,7 +137,14 @@ function displayData(value) {
         info.innerHTML += `<p class="infoStyle"><u>Price Range</u><br>Ticket price not available</p>`
     }  info.innerHTML += `<p id="pleaseNote" class="infoStyle"></p>`;
   info.innerHTML += `<p id="onSale" class="infoStyle"></p>`;
-  info.innerHTML += `<button id="ticketButton" onclick="window.open('${jsonData._embedded.events[x].url}')">Click to Purchase Tickets Now!</p></button>`;
+  info.innerHTML += `<button class="ticketButton" onclick="window.open('${jsonData._embedded.events[x].url}')">Click to Purchase Tickets Now!</p></button>`;
+// Button to get directions to venue
+  venueLat = jsonData._embedded.events[i]._embedded.venues[0].location.latitude;
+  venueLon = jsonData._embedded.events[i]._embedded.venues[0].location.longitude;
+  info.innerHTML += `<button class="ticketButton" onclick="window.open(https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLon}$destination=${venueLat},${venueLon})">Click for Directions!</p></button>`;
+  
+
+
 
   let nextShow = document.getElementById("nextShow");
   let onSale = document.getElementById("onSale");
