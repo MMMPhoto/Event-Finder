@@ -31,6 +31,7 @@ html {
     margin-right: 5px;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
     display: flex;
+    justify-items: center;
   }
   nav ul {
     list-style-type: none;
@@ -66,14 +67,15 @@ html {
   }
 
   .neon {
-    margin-top: 150px;
+    margin-top: 70px;
     position: relative;
-    width: fit-content;
+    width: 74vw;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
     filter: brightness(200%);
     border-radius: 10px;
+    opacity: 66%;
    
     
 }
@@ -82,7 +84,7 @@ html {
   background-color:black;
   border-radius: 10px;
     color: white;
-    font-size: 180px;
+    font-size: 10.09vw;
     font-weight: bold;
     font-family: sans-serif;
     text-transform: uppercase;
@@ -134,7 +136,7 @@ html {
         ) center / 12.5% 12.5%;
     animation: light 5s linear infinite;
     mix-blend-mode: color-dodge;
-    opacity: 40%;
+    
     
 }
 
@@ -208,8 +210,11 @@ html {
    border-radius: 5px;
   background-color: #12232E;
   border-color:white;
-  border-style:solid;
-  place-items: center;
+  border-style: solid;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  
  }
  #submit:hover{
   background-color: #4DA8DA;
@@ -261,15 +266,15 @@ html {
   text-align: center;
   font-size: 48pt;
   font-style: bolder;
-  border-style: solid;
+  /* border-style: solid; */
   display: flex;
   border-radius: 15px;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
   background-color:#12232E;
-  -webkit-text-stroke-width: 3px;
- -webkit-text-stroke-color: black;
+  /* -webkit-text-stroke-width: 3px;
+ -webkit-text-stroke-color: black; */
  }
 
  #searchHeader{
@@ -408,7 +413,6 @@ html {
 /* Right side info styling */
 #info{
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-  background-color: #12232E;
   width: 30%;
   max-width: 400px;
   color:white;
@@ -420,6 +424,8 @@ html {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #12232E;
+  
   
  }
 
@@ -434,6 +440,7 @@ html {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  box-shadow: inset 0 0 0 100vmax rgba(0, 0, 0, .5);
   /* -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color:#12232E; */
  }
@@ -471,20 +478,20 @@ html {
  }
 
  .pageButton:hover{
-  background-color: white;
-  border-color: black;
+  background-color:#12232E;
+  border-color:#4DA8DA;
  }
 
- .infoStyle{
-  border-radius: 5px;
-  background-color: #4DA8DA;
-   padding:20px;
+ /* .infoStyle{ */
+  /* border-radius: 5px; */
+  /* background-color: #4DA8DA; */
+   /* padding:20px; */
    /* margin: 5px; */
-   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-   background-color:hsla(204 , 44% , 13%, 0.64);
+   /* box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);  */
+   /* background-color:hsla(204 , 44% , 13%, 0.64); */
    /* width: fit-content;
    height: fit-content; */
- }
+ /* } */
 
  #ticketButton{
     font-size: 20pt;
@@ -506,4 +513,39 @@ html {
   border-radius: 5px;
   background-color: #4DA8DA;
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4);
+}
+
+@media screen and (max-width: 1000px) {
+  header {
+    background-size: contain;
+  }
+  section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  nav {
+    width: 100%;
+    padding: 0%;
+    margin-bottom: 5px;
+  }
+  article {
+    width: 100%;
+    padding: 0%;
+    margin-bottom: 5px;
+  }
+  #eventHeader {
+    width: 60vw;
+    font-size: 8vw;
+  }
+  .pageButton {
+    font-size: 4vw;
+  }
+  #info {
+    width: 100%;
+    margin-left: 0px;
+    max-width: none;
+  }
+  #map {
+    height: 80vw;
+  }
 }

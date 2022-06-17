@@ -93,7 +93,7 @@ function displayEvents(jsonData,x,y) {
         eventDisplay.innerHTML += `<p class="eventDisplay" p id= "eventDate">${date}</p>`;
         $(`#event${x + 1}`).attr("style", `background-image: url('${jsonData._embedded.events[x].images[2].url}') ` )
         // eventDisplay.innerHTML += `<p class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a></p></button>`;
-        eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href=${jsonData._embedded.events[x].url}>Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
+        eventDisplay.innerHTML += `<span class="info-button"><span class = "eventTickets"><a href="${jsonData._embedded.events[x].url}" target="_blank">Buy Tickets</a><button class="infoButton" value = "${x}" onclick="displayData(this.value)">Info</button></span></span>`;
         $(`#article`).css('background-image', 'none');
     };
     addSaveListeners();
@@ -242,6 +242,7 @@ let generateMap = (userLat, userLon) => {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
     }).addTo(map);
+     map.scrollWheelZoom.disable();
 };
 // Generate user location marker
 let addUserMarker = (userLat, userLon) => {
