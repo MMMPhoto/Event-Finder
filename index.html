@@ -1,123 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta https-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Finder</title>
-    <link rel="stylesheet" href="./assets/leaflet/leaflet.css"
+  <meta charset="UTF-8">
+  <meta https-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Finder</title>
+  <!-- <link rel="stylesheet" href="./assets/leaflet/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin="" /> -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
     integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
     crossorigin=""/>
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
-        <header style="background-image: url(./assets/img/silhouette2.png)">
-          <div class="neon">
-            <span class="text" data-text="Event Finder">Event Finder</span>
-            <span class="gradient"></span>
-            <span class="spotlight"></span>
-          </div>
-        </header>
-        
-        <section>
-          <nav>
-            
-            <div class="search">
-              <p id="searchHeader">Search for an Event</p>
-                <ul>
-               <ui><div id="searchCity">City:
-               <select name="cities" id="cityInput">
-                    <option value="User Location">Your Location</option>
-                    <option value="Atlanta">Atlanta</option>
-                    <option value="Boston">Boston</option>
-                    <option value="Chicago">Chicago</option>
-                    <option value="Denver">Denver</option>
-                    <option value="Los Angeles">Los Angeles</option>
-                    <option value="Miami">Miami</option>
-                    <option value="New York">New York</option>
-                    <option value="Philadelphia">Philadelphia</option>
-                    <option value="Phoenix">Phoenix</option>
-                    <option value="San Diego">San Diego</option>
-                    <option value="San Francisco">San Francisco</option>
-                    <option value="St Louis">St. Louis</option>
-                  </select>
-                  </div>
-                </ui> 
-                
-                <br>
-                <ui><div id="searchGenre">Event Type:
-                    <select name="genre" id="genreInput">
-                        <option value="Rock">Concerts: Rock</option>
-                        <option value="Pop">Concerts: Pop</option>
-                        <option value="Rap">Concerts: Rap</option>
-                        <option value="Metal">Concerts: Metal</option>
-                        <option value="Musicals">Musicals</option>
-                        <option value="Baseball">Sports: Baseball</option>
-                        <option value="Soccer">Sports: Soccer</option>
-                        <option value="Football">Sports: Football</option>
-                        <option value="Festivals">Festivals</option>
-                        <!-- <option value="Basketball">Sports: Basketball</option> -->
-                    </select>
-                    
-                    </div></ui>
 
-                    <br>
-                    
-                    <!-- <ui><div id="searchFamily">Family Friendly:
+<body>
+  <header style="background-image: url(./assets/img/silhouette2.png)">
+    <div class="neon">
+      <span class="text" data-text="Event Finder">Event Finder</span>
+      <span class="gradient"></span>
+      <span class="spotlight"></span>
+    </div>
+  </header>
+
+  <section>
+    <nav>
+
+      <div class="search">
+        <p id="searchHeader">Search for an Event</p>
+        <ul>
+          <ui>
+            <div id="searchCity">City:
+              <select name="cities" id="cityInput">
+                <option value="User Location">Your Location</option>
+                <option value="Atlanta">Atlanta</option>
+                <option value="Boston">Boston</option>
+                <option value="Chicago">Chicago</option>
+                <option value="Denver">Denver</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="Miami">Miami</option>
+                <option value="New York">New York</option>
+                <option value="Philadelphia">Philadelphia</option>
+                <option value="Phoenix">Phoenix</option>
+                <option value="San Diego">San Diego</option>
+                <option value="San Francisco">San Francisco</option>
+                <option value="St Louis">St. Louis</option>
+              </select>
+            </div>
+          </ui>
+
+          <br>
+          <ui>
+            <div id="searchGenre">Event Type:
+              <select name="genre" id="genreInput">
+                <option value="Rock">Concerts: Rock</option>
+                <option value="Pop">Concerts: Pop</option>
+                <option value="Rap">Concerts: Rap</option>
+                <option value="Metal">Concerts: Metal</option>
+                <option value="Musicals">Musicals</option>
+                <option value="Baseball">Sports: Baseball</option>
+                <option value="Soccer">Sports: Soccer</option>
+                <option value="Football">Sports: Football</option>
+                <option value="Festivals">Festivals</option>
+                <!-- <option value="Basketball">Sports: Basketball</option> -->
+              </select>
+
+            </div>
+          </ui>
+
+          <br>
+
+          <!-- <ui><div id="searchFamily">Family Friendly:
                         <select name="family" id="familyInput">
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                           </select>
                         </div></ui> --> -->
 
-                        <!-- <br> -->
+          <!-- <br> -->
 
-                        <ui><div id="searchRadius">Radius:
-                          <select name="radius" id="radiusInput">
-                              <option value="10">Within 10 miles</option>
-                              <option value="20">Within 20 miles</option>
-                              <option value="30">Within 30 miles</option>
-                              <option value="50">Within 50 miles</option>
-                            </select>
-                          </div></ui>
-
-                          <br>
-
-                          <ui><div id="searchDate">Select Date:
-                            <input type="text" id="monthInput" minlength="2" maxlength="2" placeholder="mm">
-                            <input type="text" id="dayInput" minlength="2" maxlength="2" placeholder="dd">
-                            <input type="text" id="yearInput" minlength="4" maxlength="4" placeholder="yyyy">
-                            </div></ui>
-
-                          
-                </ul>
-                <button id="submit" onclick="handleSearch()">Submit</button>
-                <ul id="saveTitle"></ul>
+          <ui>
+            <div id="searchRadius">Radius:
+              <select name="radius" id="radiusInput">
+                <option value="10">Within 10 miles</option>
+                <option value="20">Within 20 miles</option>
+                <option value="30">Within 30 miles</option>
+                <option value="50">Within 50 miles</option>
+              </select>
             </div>
-            
-          </nav>
-          
-          <article id="article">
-            <p id="eventHeader"></p>
-              <div id="eventList"></div>
-          </article>
-          
-          <div id="info">
-            <div id="infoDisplay">
-            <br><u></u></div>
+          </ui>
 
-          </div>
-        </section>
+          <br>
 
-        <div id="map"></div>
-        <footer>
-          <p></p>
-        </footer>
-    
-    <script src="./assets/leaflet/leaflet.js"
+          <ui>
+            <div id="searchDate">Select Date:
+              <input type="text" id="monthInput" minlength="2" maxlength="2" placeholder="mm">
+              <input type="text" id="dayInput" minlength="2" maxlength="2" placeholder="dd">
+              <input type="text" id="yearInput" minlength="4" maxlength="4" placeholder="yyyy">
+            </div>
+          </ui>
+
+
+        </ul>
+        <button id="submit" onclick="handleSearch()">Submit</button>
+        <ul id="saveTitle"></ul>
+      </div>
+
+    </nav>
+
+    <article id="article">
+      <p id="eventHeader"></p>
+      <div id="eventList"></div>
+    </article>
+
+    <div id="info">
+      <div id="infoDisplay">
+        <br><u></u>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="map"></div>
+  <footer>
+    <p></p>
+  </footer>
+
+  <!-- <script src="./assets/leaflet/leaflet.js"
         integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-        crossorigin=""></script>
-    <script src="./assets/js/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin=""></script> -->
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""></script>
+  <script src="./assets/js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
+
 </html>
