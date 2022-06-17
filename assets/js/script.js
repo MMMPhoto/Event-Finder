@@ -198,7 +198,7 @@ timeValue += (hours >= 12) ? " P.M." : " A.M.";
 }
 
 //function to get all save buttons from search results
-function addSaveListeners() {
+function addSaveListeners()
     //variable set to find all the save buttons
     var allSavebuttons = document.getElementsByClassName("saveButton")
     //console.log(allSavebuttons)
