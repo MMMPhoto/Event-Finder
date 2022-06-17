@@ -526,10 +526,12 @@ html {
   nav {
     width: 100%;
     padding: 0%;
+    margin-bottom: 5px;
   }
   article {
     width: 100%;
     padding: 0%;
+    margin-bottom: 5px;
   }
   #eventHeader {
     width: 60vw;
@@ -539,10 +541,9 @@ html {
     font-size: 4vw;
   }
   #info {
-    width: 100vw;
-  }
-  #info-display {
     width: 100%;
+    margin-left: 0px;
+    max-width: none;
   }
   #map {
     height: 80vw;
