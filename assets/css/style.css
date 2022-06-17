@@ -493,14 +493,14 @@ html {
    height: fit-content; */
  /* } */
 
- #ticketButton{
+ .ticketButton{
     font-size: 20pt;
     color:white;
    background-color: #12232E;
    text-align: center;
   
   }
-  #ticketButton:hover{
+  .ticketButton:hover{
    background-color: #4DA8DA;
  }
  
