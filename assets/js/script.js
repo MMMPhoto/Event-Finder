@@ -2,6 +2,7 @@ var apiKey = "TcnFtVJuGcgL3ubSuuGQMpjlZcPwVVqZ";
 var eventSubmit = document.querySelector(".event");
 let x = 0;
 let y = 9;
+let jsonData = []
 
 function handleSearch() {
  
@@ -33,6 +34,7 @@ function handleSearch() {
     fetch(url).then(data => data.json()).then(data => {
 
         jsonData = data;
+        // console.log(jsonData,data);
         console.log(jsonData);
         displayEvents(jsonData,x,y);
         addEventMarkers(jsonData);
@@ -198,23 +200,37 @@ timeValue += (hours >= 12) ? " P.M." : " A.M.";
 }
 
 //function to get all save buttons from search results
+<<<<<<< HEAD
 function addSaveListeners()
+=======
+function addSaveListeners() {
+  console.log("jsonData",jsonData)
+>>>>>>> c2d3bf1481b886e697017aedbc0f3cda2b7c3946
     //variable set to find all the save buttons
     var allSavebuttons = document.getElementsByClassName("saveButton")
-    //console.log(allSavebuttons)
+   /* console.log(allSavebuttons)
     for (i=0; i < allSavebuttons.length; i++) {
         var title = allSavebuttons[i].nextElementSibling.textContent
-        //console.log(title)
-        allSavebuttons[i].addEventListener("click", addLocalStorage.bind(null,title))
-    }
+        console.log(title)
+        // allSavebuttons[i].addEventListener("click", addLocalStorage.bind(null,title))
+        
+    }*/
+    jsonData?._embedded?.events?.forEach((item,i)=>{
+      allSavebuttons[i].addEventListener("click", addSessionStorage.bind(null,item))
+    })
     
 }
-
-function addLocalStorage(input) {
-    //console.log(input)
-    localStorage.setItem("selectedTitle", input);
-    displayTitles()
+function addSessionStorage(input) {
+  console.log(input)
+  const sessionItems = JSON.parse(sessionStorage.getItem("selectedTitle")) || []
+  sessionStorage.setItem("selectedTitle", JSON.stringify([...sessionItems,input]));
+  displayTitles()
 }
+// function addLocalStorage(input) {
+//     //console.log(input)
+//     localStorage.setItem("selectedTitle", input);
+//     displayTitles()
+// }
 
 // Set global map variables
 let userLat;
@@ -271,11 +287,21 @@ let addEventMarkers = (jsonData) => {
 //Fucntion displays titles from local storage to left side of page
 function displayTitles() {
     var saveTitles = document.getElementById("saveTitle")
-    var selectedTitle = localStorage.getItem("selectedTitle")
-    //console.log(selectedTitle)
+    saveTitles.innerHTML = ""
     
-    if (selectedTitle !== null){
-        saveTitles.innerHTML += (`<li>${selectedTitle}</li>`)
+    // selectedTitles variable is storing the array of selected titles from session storage
+    var selectedTitles = JSON.parse(sessionStorage.getItem("selectedTitle"))
+    console.log(selectedTitles,jsonData)
+    
+    if (selectedTitles !== null){
+selectedTitles.forEach((titleData)=>{
+  saveTitles.innerHTML += `<li id="sidebuttons"><button onclick="window.open('${titleData?.url}')">${titleData?.name}</button></li>`;
+
+})
+        // saveTitles.innerHTML += (`<li>${selectedTitle}</li>`)
     }
 }
 displayTitles();
+
+
+console.log(jsonData)
