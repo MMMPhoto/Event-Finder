@@ -479,7 +479,7 @@ html {
 
  .pageButton:hover{
   background-color:#12232E;
-  border-color:#4DA8DA;
+  border-color:white;
  }
 
  /* .infoStyle{ */
@@ -493,35 +493,42 @@ html {
    height: fit-content; */
  /* } */
 
- #ticketButton{
-    font-size: 20pt;
+ .ticketButton{
+    font-size: 16pt;
     color:white;
    background-color: #12232E;
    text-align: center;
+   border-color: white;
+   border-style: solid;
+   border-radius: 5px;
+   width: 100%;
+   
+
+   
   
   }
-  #ticketButton:hover{
+  .ticketButton:hover{
    background-color: #4DA8DA;
  }
  
- #saveTitle {
+ /* #saveTitle {
   color: white;
   border: solid white;
   border-radius: 5px;
   background-color: #4DA8DA;
   box-shadow: 0 10px 10px rgb(0 0 0 / 0.4); 
-}
+} */
 #sidebuttons > button{
-  background-color:hsla(204 , 44% , 13%, 0.64);
-  font-size: 15px;
-  padding: 5px 10px;
+  background-color:#12232E;
+  font-size: 20px;
   border: solid white;
   border-radius: 5px;
   color:white;
+  width: 100%;
 }
 #sidebuttons:hover button{
-  color: #4DA8DA;
-  font-size: larger;
+  background-color: #4DA8DA;
+
 }
 
 @media screen and (max-width: 1000px) {
